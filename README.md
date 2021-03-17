@@ -1,11 +1,6 @@
-# Projeto Integrador - Pythaon
+# <h1>Projeto Integrador 4º Semestre BD - Grupo Pythaon</h1>
 
 GitLab para desenvolvimento do Projeto Integrador do 4º Semestre - Banco de dados FATEC SJC
-
-<h1>Projeto Integrador 4º Semestre BD - Grupo Pythaon</h1>
-
-
- #
 
 # INTEGRANTES
 
@@ -14,4 +9,4 @@ GitLab para desenvolvimento do Projeto Integrador do 4º Semestre - Banco de dad
  * ARTHUR CARDOSO RINALDI DA SILVA 
  * GUSTAVO RIBEIRO DOS SANTOS (Master)
  * PERILO CARVALHO DE OLIVEIRA JUNIOR
- * Vinicius Fernandes de Lima
+ * VINICIUS FERNANDES DE LIMA
