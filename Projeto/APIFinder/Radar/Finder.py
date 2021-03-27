@@ -1,7 +1,4 @@
-from Mongo_Connection import *
-import json
-import requests
-import urllib.request
+from .Mongo_Connection import *
 
 class Finder:
 

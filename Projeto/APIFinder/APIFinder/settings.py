@@ -74,11 +74,21 @@ WSGI_APPLICATION = 'APIFinder.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+#DATABASES = {
+ #   'default': {
+ #   'ENGINE': 'djongo',
+ #   'NAME': 'databaseteste',
+ #}
+#}
+
 DATABASES = {
-    'default': {
-    'ENGINE': 'djongo',
-    'NAME': 'databaseteste',
- }
+        'default': {
+        'ENGINE': 'djongo',
+        'NAME': 'Finder',
+        'HOST': 'mongodb+srv://dbUser:system@cluster0.5hlez.mongodb.net/Finder?retryWrites=true&w=majority',
+        'USER': 'dbUser',
+        'PASSWORD': 'system',
+    }
 }
 
 
