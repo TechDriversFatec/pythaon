@@ -51,7 +51,7 @@ Nossa proposta é desenvolver um sistema para a otimização e facilite o proces
 #### Sprint 04
 
 ## Diagrama de caso de uso:
-![Casos de uso](/Documentos/CasoUso.png)
+![Casos de uso](/Documentos/CasoUso1.png)
 ## Modelo do banco de dados:
 
 ## Diagrama de classes do banco de dados:
