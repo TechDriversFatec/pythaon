@@ -1,43 +1,68 @@
-db.curriculo.insert({
-  nome:"arthur cardoso",
-  DataNasc:"25/09/00",
-  rg:"37.715.750-8",
-  Formacao : [
-   {desc : "tecnico informatica"},
-   {instituicao: "instituicao"},
-   {concluido:"01/01/2021"},
-   {previaConclusao:""}],
-   Exp: [
-   {cargo : "tecnico"},
-   {desc : "gestor"},
-   {dataInicio:"01/01/2021"},
-   {dataFinal:""}],
-   Endereco: [
-   {cep:"12235-610",},
-   {rua : "terezina"},
-   {bairro:"parque industrial"},
-   {cidade:"Sao jose dos campos"},
-   {estado:"Sao Paulo"}],
-   Contato:[
-     {email:"email@email.com"},
-     {tel:"(12)981671982"}]
+db.curriculo.insert(
+{
+  "nome":"arthur cardoso",
+  "dataNasc":"25/09/00",
+  "rg":"37.715.750-8",
+  "formacao" : [
+    {
+      "desc" : "tecnico informatica",
+      "instituicao": "instituicao",
+      "concluido":"01/01/2021",
+      "previaConclusao":""
+    }
+  ],
+  "exp":[
+    {
+      "cargo":"tecnico",
+      "desc":"gestor",
+      "dataInicio":"01/01/2021",
+      "dataFinal":""
+    }
+  ],
+  "endereco": [
+    {
+      "cep":"12235-610",
+      "rua": "terezina",
+      "bairro":"parque industrial",
+      "cidade":"Sao jose dos campos",
+      "estado":"Sao Paulo"
+    }
+  ],
+  "contato":[
+    {
+      "email":"email@email.com",
+      "tel":"(12)981671982"
+    }
+  ]
 });
 
 
-db.vaga.insert({
-  requisitos : [
-    {desc:"java pleno"},
-    {desc:"banco sql e noSql"}],
-  vigenciaDataInicial:"01/01/2021",
-  vigenciaDataFinal:"31/12/2021",
-  urgencia:"baixa",
-  Endereco: [
-   {cep:"12235-610",},
-   {rua : "terezina"},
-   {bairro:"parque industrial"},
-   {cidade:"Sao jose dos campos"},
-   {estado:"Sao Paulo"}],
-   Contato:[
-     {email:"email@email.com"},
-     {tel:"(12)981671982"}]
+db.vaga.insert(
+{
+  "vigenciaDataInicial":"01/01/2021",
+  "vigenciaDataFinal":"31/12/2021",
+  "urgencia":"baixa",
+  "requisitos":[
+    {
+      "desc":"java pleno"
+    },
+    {
+      "desc":"banco sql e noSql"
+    }
+  ],
+  "endereco":[
+    {
+      "cep":"12235-610",
+      "rua":"terezina",
+      "bairro":"parque industrial",
+      "cidade":"Sao jose dos campos",
+      "estado":"Sao Paulo"
+    }
+  ],
+  "contato":[
+    {
+      "email":"email@email.com",
+      "tel":"(12)981671982"
+    }
+   ]
 });
