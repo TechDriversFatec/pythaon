@@ -26,7 +26,7 @@ def home(self):
    for x in mydoc:
       print(x)
 
-   return HttpResponse("Welcome to poll's index!")
+   return HttpResponse("Curriculo encontrado com sucesso!")
    # finder_instance = Finder()
    
    # myquery = { "nome": "arthur cardoso" }
@@ -55,7 +55,18 @@ def buscarvaga(request):
       #   return redirect('/tarefas')
          for x in mydoc:
             print(x)
-   return HttpResponse("Achou!")
+   return HttpResponse("Vaga encontrada com sucesso!")
  
-#  context = {'task': task}
-#  return render(request, 'bridges_app/delete_tarefa.html', context)
+
+@csrf_exempt
+def CadastrarCurriculo(request):
+
+   if request.method == "POST":
+         myclient = pymongo.MongoClient("mongodb+srv://dbUser:system@cluster0.5hlez.mongodb.net/Finder?retryWrites=true&w=majority")
+         mydb = myclient["Finder"]
+         mycol = mydb["curriculo"]
+
+         newcurriculo = json.loads(request.body)
+         mydoc = mycol.insert_one(newcurriculo)
+
+   return HttpResponse("Curriculo cadastrado com sucesso!")
