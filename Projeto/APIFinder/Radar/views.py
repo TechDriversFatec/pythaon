@@ -70,3 +70,16 @@ def CadastrarCurriculo(request):
          mydoc = mycol.insert_one(newcurriculo)
 
    return HttpResponse("Curriculo cadastrado com sucesso!")
+
+@csrf_exempt
+def AtualizarCurriculo(request):
+
+   if request.method == 'POST':
+      myclient = pymongo.MongoClient("mongodb+srv://dbUser:system@cluster0.5hlez.mongodb.net/Finder?retryWrites=true&w=majority")
+      mydb = myclient["Finder"]
+      mycol = mydb["curriculo"]
+
+      updatecurriculo = json.loads(request.body)
+      mydoc = mycol.update_one(updatecurriculo)
+
+   return HttpResponse("Curriculo atualizado com sucesso!")
