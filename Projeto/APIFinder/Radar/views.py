@@ -6,6 +6,7 @@ from pymongo import MongoClient
 import dns
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from bson import ObjectId
 
 #finder_instance = None
 
@@ -56,6 +57,30 @@ def buscarvaga(request):
          for x in mydoc:
             print(x)
    return HttpResponse("Achou!")
+   
+@csrf_exempt
+def insert_vaga(request):
+   if request.method == "POST":
+      myclient = pymongo.MongoClient("mongodb+srv://dbUser:system@cluster0.5hlez.mongodb.net/Finder?retryWrites=true&w=majority")
+      mydb = myclient["Finder"]
+      mycol = mydb["vaga"]
+      insert = json.loads(request.body)
+      aux = mycol.insert_one(insert)
+      return HttpResponse("Vaga cadastrada!")
+
+     
+
+
+@csrf_exempt
+def delete_vaga(request):
+   if request.method == "DELETE":
+      myclient = pymongo.MongoClient("mongodb+srv://dbUser:system@cluster0.5hlez.mongodb.net/Finder?retryWrites=true&w=majority")
+      mydb = myclient["Finder"]
+      mycol = mydb["vaga"]
+      delete = json.loads(request.body)
+      mycol.delete_one(delete)
+      return HttpResponse("Vaga excluida!")
+
  
 #  context = {'task': task}
 #  return render(request, 'bridges_app/delete_tarefa.html', context)
