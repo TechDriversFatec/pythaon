@@ -72,14 +72,32 @@ def CadastrarCurriculo(request):
    return HttpResponse("Curriculo cadastrado com sucesso!")
 
 @csrf_exempt
-def AtualizarCurriculo(request):
+def AtualizarCurriculo(request, pk):
 
-   if request.method == 'POST':
+   if request.method == "POST":
+         myclient = pymongo.MongoClient("mongodb+srv://dbUser:system@cluster0.5hlez.mongodb.net/Finder?retryWrites=true&w=majority")
+         mydb = myclient["Finder"]
+         mycol = mydb["curriculo"]
+
+
+         myquery = { "_id": pk }
+         newvalues = json.loads(request.body)
+
+         mycol.update_one(myquery, newvalues)
+
+   return HttpResponse("Curriculo atualizar com sucesso!")
+
+
+@csrf_exempt
+def DeletarCurriculo(request, pk):
+   if request.method == "DELETE":
       myclient = pymongo.MongoClient("mongodb+srv://dbUser:system@cluster0.5hlez.mongodb.net/Finder?retryWrites=true&w=majority")
       mydb = myclient["Finder"]
       mycol = mydb["curriculo"]
 
-      updatecurriculo = json.loads(request.body)
-      mydoc = mycol.update_one(updatecurriculo)
+      myquery = { "_id": pk}
+      deletevalues = json.loads(request.body)
 
-   return HttpResponse("Curriculo atualizado com sucesso!")
+      mycol.delete_one(myquery, deletevalues)
+
+   return HttpResponse("Curriculo excluído!")
