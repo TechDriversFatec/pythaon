@@ -90,14 +90,12 @@ def AtualizarCurriculo(request, pk):
 
 @csrf_exempt
 def DeletarCurriculo(request, pk):
-   if request.method == "DELETE":
+   if request.method == "POST":
       myclient = pymongo.MongoClient("mongodb+srv://dbUser:system@cluster0.5hlez.mongodb.net/Finder?retryWrites=true&w=majority")
       mydb = myclient["Finder"]
       mycol = mydb["curriculo"]
 
       myquery = { "_id": pk}
-      deletevalues = json.loads(request.body)
-
-      mycol.delete_one(myquery, deletevalues)
+      mycol.delete_one(myquery)
 
    return HttpResponse("Curriculo excluído!")
