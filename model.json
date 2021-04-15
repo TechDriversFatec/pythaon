@@ -1,43 +1,69 @@
-db.curriculo.insert({
-  nome:"arthur cardoso",
-  DataNasc:"25/09/00",
-  rg:"37.715.750-8",
-  Formacao : [
-   {desc : "tecnico informatica"},
-   {instituicao: "instituicao"},
-   {concluido:"01/01/2021"},
-   {previaConclusao:""}],
-   Exp: [
-   {cargo : "tecnico"},
-   {desc : "gestor"},
-   {dataInicio:"01/01/2021"},
-   {dataFinal:""}],
-   Endereco: [
-   {cep:"12235-610",},
-   {rua : "terezina"},
-   {bairro:"parque industrial"},
-   {cidade:"Sao jose dos campos"},
-   {estado:"Sao Paulo"}],
-   Contato:[
-     {email:"email@email.com"},
-     {tel:"(12)981671982"}]
+db.Inscrito.insert(
+{
+    "vagaIdExterno":"1",
+    "rgInscrito":"123.123.123-12",
+    "dataNascimentoInscrito":"25/09/2000",
+    "sexoInscrito":"masculino",
+    "telefoneCelularInscrito":"(12)9816719999",
+    "jornadaDesejadaInscrito":"padrão",
+    "tipoContratoDesejadoInscrito":"clt",
+    "EmailInscrito":"email@email.com",
+    "perfilProfissionalTituloInscrito":"full stack developer",
+    "perfilProfissionalDescricaoInscrito":"pleno com conhecimento em desenvolvimento full stack com node, dotnet, angular e react",
+    "nomeCompletoInscrito":"arthur c",
+    "enderecoCEPInscrito":"12235-608",
+    "enderecoLocalizacaoInscrito":"rua, bairro",
+    "complementoInscrito":"",
+    "enderecoLocalizacaoLatitudeInscrito":"",
+    "enderecoLocalizacaoLongitudeInscrito":"",
+
+    "experienciaProfissional": [
+        {
+         "descricao": "Desenvolvimento com front e back end",
+         "duracaoTempoExperiencia":"2 anos",
+         }
+      ],
+
+      "competencia": [
+        {
+         "descricao": "poliglota",
+        }
+      ],
+
+    "formacao": [
+        {
+            "curso":"banco de dados",
+            "Dataformacao":"22/06/2020",
+            "intituicao":"fatec"
+        }
+      ],
 });
 
+db.vaga.insert(
+{
+    "candidatoIdExterno":"1",
+    "tituloVaga":"desc da vaga",
+    "tipoContratacaoPerfilVaga":"clt",
+    "tipoJornadaPerfilVaga":"liberal",
+    "localEnderecoCEPPerfilVaga":"12235-600",
+    "localEnderecoPerfilVaga":"rua, bairro",
+    "localEnderecoNumeroPerfilVaga":"1234",
+    "faixaEtariaInicioPerfilVaga":"21",
+    "faixaEtariaFimPerfilVaga":"35",
+    "tempoExperienciaPerfilVaga":"2 anos",
+    "faixaSalarioInicioPerfilVaga":"2500.00",
+    "dataInicioDivulgacaoPerfilVaga":"01/1/2021",
+    "datafinaldivulgacaoPerfilVaga":"31/01/2021",
 
-db.vaga.insert({
-  requisitos : [
-    {desc:"java pleno"},
-    {desc:"banco sql e noSql"}],
-  vigenciaDataInicial:"01/01/2021",
-  vigenciaDataFinal:"31/12/2021",
-  urgencia:"baixa",
-  Endereco: [
-   {cep:"12235-610",},
-   {rua : "terezina"},
-   {bairro:"parque industrial"},
-   {cidade:"Sao jose dos campos"},
-   {estado:"Sao Paulo"}],
-   Contato:[
-     {email:"email@email.com"},
-     {tel:"(12)981671982"}]
+    "competencia": [
+        {
+         "descricao": "poliglota",
+        }
+    ],
+
+     "PalavraChave" :[
+         {
+            "DescricaoPalavraChave":"Chave",
+         }
+    ],
 });
