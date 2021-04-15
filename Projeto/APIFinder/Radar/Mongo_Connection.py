@@ -1,6 +1,6 @@
 import pymongo
 from pymongo import MongoClient
-from Finder import *
+from .Finder import *
 
 class Mongo_Connection:
 

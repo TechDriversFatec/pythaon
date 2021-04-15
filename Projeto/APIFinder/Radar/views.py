@@ -42,21 +42,33 @@ def home(self):
 @csrf_exempt
 def buscarvaga(request):
    vaga = request.POST.get('id_vaga')
-   #  vaga = vaga.objects.get(_id=id_vaga)
 
    if request.method == "POST":
          myclient = pymongo.MongoClient("mongodb+srv://dbUser:system@cluster0.5hlez.mongodb.net/Finder?retryWrites=true&w=majority")
          mydb = myclient["Finder"]
          mycol = mydb["vaga"]
 
-         myquery = { "urgencia": "baixa" }
+         myquery = json.loads(request.body)
 
          mydoc = mycol.find(myquery)
-      #   return redirect('/tarefas')
          for x in mydoc:
             print(x)
    return HttpResponse("Vaga encontrada com sucesso!")
- 
+
+@csrf_exempt
+def updatevaga(request, id):
+   if request.method == "POST":
+         myclient = pymongo.MongoClient("mongodb+srv://dbUser:system@cluster0.5hlez.mongodb.net/Finder?retryWrites=true&w=majority")
+         mydb = myclient["Finder"]
+         mycol = mydb["vaga"]
+         myquery = { "_id": id }
+         newvalues = json.loads(request.body)
+
+         mycol.update_one(myquery, newvalues)
+         for x in mycol.find():
+            print(x)
+
+   return HttpResponse("Vaga atualizada com sucesso!")
 
 @csrf_exempt
 def CadastrarCurriculo(request):
