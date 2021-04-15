@@ -72,15 +72,16 @@ def insert_vaga(request):
 
 
 @csrf_exempt
-def delete_vaga(request):
+def delete_vaga(request, pk):
    if request.method == "DELETE":
       myclient = pymongo.MongoClient("mongodb+srv://dbUser:system@cluster0.5hlez.mongodb.net/Finder?retryWrites=true&w=majority")
       mydb = myclient["Finder"]
       mycol = mydb["vaga"]
-      delete = json.loads(request.body)
-      mycol.delete_one(delete)
-      return HttpResponse("Vaga excluida!")
 
- 
+      myquery = { "_id": pk}
+      mycol.delete_one(myquery)
+
+      return HttpResponse("Vaga excluida!")
+      
 #  context = {'task': task}
 #  return render(request, 'bridges_app/delete_tarefa.html', context)
