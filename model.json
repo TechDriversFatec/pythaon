@@ -39,7 +39,7 @@ db.Inscrito.insert(
       ],
 });
 
-db.vaga.insert(
+db.vagas.insert(
 {
     "VagaIdExterno":"1",
     "tituloVaga":"desc da vaga",
