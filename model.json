@@ -1,6 +1,6 @@
 db.Inscrito.insert(
 {
-    "vagaIdExterno":"1",
+    "InscritoIdExterno":"1",
     "rgInscrito":"123.123.123-12",
     "dataNascimentoInscrito":"25/09/2000",
     "sexoInscrito":"masculino",
@@ -41,7 +41,7 @@ db.Inscrito.insert(
 
 db.vaga.insert(
 {
-    "candidatoIdExterno":"1",
+    "VagaIdExterno":"1",
     "tituloVaga":"desc da vaga",
     "tipoContratacaoPerfilVaga":"clt",
     "tipoJornadaPerfilVaga":"liberal",
