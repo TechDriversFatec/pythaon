@@ -8,6 +8,7 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from bson.json_util import dumps
+from bson.objectid import ObjectId
 
 #finder_instance = None
 
@@ -51,11 +52,13 @@ def buscarPorVaga(request,VagaID):
       client = createConnection()
 
       mydb = client["Finder"]
-      curriculos = mydb["curriculo"]
+      curriculos = mydb["Inscrito"]
       vagas = mydb["vagas"]
 
+
+      print(VagaID)
       # Recupera a vaga recebida por parâmatro
-      vaga = vagas.find_one({"_id" : VagaID})
+      vaga = vagas.find_one({"_id" : ObjectId(VagaID)})
 
       if vaga:
          searchRequisitos = '|'.join([str(requisito['descricao']) for requisito in vaga['competencia']])
