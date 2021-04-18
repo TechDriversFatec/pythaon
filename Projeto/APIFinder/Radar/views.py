@@ -6,20 +6,16 @@ from pymongo import MongoClient
 import dns
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-
-#finder_instance = None
-
-#def init(self):
- #       self.finder_instance = Finder()
         
         
 # Create your views here.
-def home(self):
+@csrf_exempt
+def BuscarCurriculo(request, pk):
    myclient = pymongo.MongoClient("mongodb+srv://dbUser:system@cluster0.5hlez.mongodb.net/Finder?retryWrites=true&w=majority")
    mydb = myclient["Finder"]
    mycol = mydb["curriculo"]
 
-   myquery = { "nome": "arthur cardoso" }
+   myquery = { "_id": pk }
 
    mydoc = mycol.find(myquery)
 
@@ -27,35 +23,6 @@ def home(self):
       print(x)
 
    return HttpResponse("Curriculo encontrado com sucesso!")
-   # finder_instance = Finder()
-   
-   # myquery = { "nome": "arthur cardoso" }
-   # result = finder_instance.search(myquery)
-
-   # if result.count() == 0:
-   #    print("Nenhum curriculo encontrado...")
-
-   # else:
-   #    for jsn in result:
-   #       print(jsn['_id'])
-
-@csrf_exempt
-def buscarvaga(request):
-   vaga = request.POST.get('id_vaga')
-   #  vaga = vaga.objects.get(_id=id_vaga)
-
-   if request.method == "POST":
-         myclient = pymongo.MongoClient("mongodb+srv://dbUser:system@cluster0.5hlez.mongodb.net/Finder?retryWrites=true&w=majority")
-         mydb = myclient["Finder"]
-         mycol = mydb["vaga"]
-
-         myquery = { "urgencia": "baixa" }
-
-         mydoc = mycol.find(myquery)
-      #   return redirect('/tarefas')
-         for x in mydoc:
-            print(x)
-   return HttpResponse("Vaga encontrada com sucesso!")
  
 
 @csrf_exempt
@@ -71,18 +38,3 @@ def CadastrarCurriculo(request):
 
    return HttpResponse("Curriculo cadastrado com sucesso!")
 
-@csrf_exempt
-def AtualizarCurriculo(request, pk):
-
-   if request.method == "POST":
-         myclient = pymongo.MongoClient("mongodb+srv://dbUser:system@cluster0.5hlez.mongodb.net/Finder?retryWrites=true&w=majority")
-         mydb = myclient["Finder"]
-         mycol = mydb["curriculo"]
-
-
-         myquery = { "_id": pk }
-         newvalues = json.loads(request.body)
-
-         mycol.update_one(myquery, newvalues)
-
-   return HttpResponse("Curriculo atualizar com sucesso!")
