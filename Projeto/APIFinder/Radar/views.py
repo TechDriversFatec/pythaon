@@ -57,7 +57,7 @@ def buscarvaga(request):
          for x in mydoc:
             print(x)
    return HttpResponse("Achou!")
-   
+  
 @csrf_exempt
 def insert_vaga(request):
    if request.method == "POST":
