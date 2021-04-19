@@ -153,26 +153,3 @@ def DeletarCurriculo(request, pk):
       mycol.delete_one(myquery)
 
    return HttpResponse("Curriculo excluído!")
-
-@csrf_exempt
-def insert_vaga(request):
-   if request.method == "POST":
-      myclient = pymongo.MongoClient("mongodb+srv://dbUser:system@cluster0.5hlez.mongodb.net/Finder?retryWrites=true&w=majority")
-      mydb = myclient["Finder"]
-      mycol = mydb["vaga"]
-      insert = json.loads(request.body)
-      aux = mycol.insert_one(insert)
-      return HttpResponse("Vaga cadastrada!")
-
-     
-@csrf_exempt
-def delete_vaga(request, pk):
-   if request.method == "DELETE":
-      myclient = pymongo.MongoClient("mongodb+srv://dbUser:system@cluster0.5hlez.mongodb.net/Finder?retryWrites=true&w=majority")
-      mydb = myclient["Finder"]
-      mycol = mydb["vaga"]
-
-      myquery = { "_id": pk}
-      mycol.delete_one(myquery)
-
-      return HttpResponse("Vaga excluida!")
