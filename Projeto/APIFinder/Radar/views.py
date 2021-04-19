@@ -19,19 +19,20 @@ def createConnection():
    return pymongo.MongoClient("mongodb+srv://dbUser:system@cluster0.5hlez.mongodb.net/Finder?retryWrites=true&w=majority")
 
 # Create your views here.
-def home(self):
+@csrf_exempt
+def BuscarCurriculo(request, pk):
+
    myclient = createConnection(self)
    mydb = myclient["Finder"]
    mycol = mydb["curriculo"]
 
-   myquery = { "nome": "arthur cardoso" }
+   myquery = { "_id": pk }
 
    mydoc = mycol.find(myquery)
 
    for x in mydoc:
       print(x)
-
-   return HttpResponse("Welcome to poll's index!")
+   return HttpResponse("Curriculo encontrado com sucesso!")
 
 def searchByCargo(self):
    client = createConnection(self)
@@ -92,7 +93,7 @@ def buscarPorVaga(request,VagaID):
    else:
       return JsonResponse({"message": "Erro na requisição. Método esperado GET."}, status=500)
 
-      @csrf_exempt
+@csrf_exempt
 def buscarvaga(request):
    vaga = request.POST.get('id_vaga')
    #  vaga = vaga.objects.get(_id=id_vaga)
@@ -109,13 +110,12 @@ def buscarvaga(request):
          for x in mydoc:
             print(x)
    return HttpResponse("Vaga encontrada com sucesso!")
- 
 
 @csrf_exempt
 def CadastrarCurriculo(request):
 
    if request.method == "POST":
-         myclient = pymongo.MongoClient("mongodb+srv://dbUser:system@cluster0.5hlez.mongodb.net/Finder?retryWrites=true&w=majority")
+         myclient = createConnection(self)         
          mydb = myclient["Finder"]
          mycol = mydb["curriculo"]
 
@@ -123,6 +123,7 @@ def CadastrarCurriculo(request):
          mydoc = mycol.insert_one(newcurriculo)
 
    return HttpResponse("Curriculo cadastrado com sucesso!")
+
 
 @csrf_exempt
 def AtualizarCurriculo(request, pk):
