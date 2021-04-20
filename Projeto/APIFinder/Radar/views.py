@@ -114,7 +114,7 @@ def buscarvaga(request):
          for x in mydoc:
             print(x)
    return HttpResponse("Achou!")
-   
+  
 @csrf_exempt
 def insert_vaga(request):
    if request.method == "POST":
@@ -187,4 +187,8 @@ def DeletarCurriculo(request, pk):
       myquery = { "_id": pk}
       mycol.delete_one(myquery)
 
+      return HttpResponse("Vaga excluida!")
+      
+#  context = {'task': task}
+#  return render(request, 'bridges_app/delete_tarefa.html', context)
    return HttpResponse("Curriculo excluído!")
