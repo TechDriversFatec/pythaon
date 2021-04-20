@@ -42,9 +42,18 @@ Nossa proposta é desenvolver um sistema para a otimização e que facilite o pr
 | Definir funcionalidades iniciais  | Concluído  |
 | Definir estrutura exemplo do documento de candidato  | Concluído  |
 | Implementação da conexão com MongoDB  | Concluído  |
-| Inserir exemplo de currículo e criar busca simples  | Concluído  |
+| Inserir exemplo de currículo e criar busca simples  | Concluído |
 
 #### Sprint 02
+| Requisito           | Status |  
+| ----------------------------------|---------|
+| Definir estrutura para currículo | Concluído |
+| Definir estrutura para vaga | Concluído |
+| Criar interface crud de candidatos | Concluído |
+| Criar interface crud de vagas | Concluído |
+| Criar método de busca de currículos por vaga | Concluído |
+| Iniciar a documentação de uso das APIs do projeto | Concluído |
+
 
 #### Sprint 03
 
@@ -95,6 +104,8 @@ Nossa proposta é desenvolver um sistema para a otimização e que facilite o pr
   "contato":[]
 }
 ```
+## Documentação da API
+
 
 ## Tecnologias Utilizadas:
 * Python/Django

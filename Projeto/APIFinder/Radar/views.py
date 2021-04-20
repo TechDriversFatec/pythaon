@@ -5,39 +5,93 @@ import pymongo
 from pymongo import MongoClient
 import dns
 from django.http import HttpResponse
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from bson.json_util import dumps
+from bson.objectid import ObjectId
 
 #finder_instance = None
 
 #def init(self):
  #       self.finder_instance = Finder()
         
-        
+def createConnection():
+   return pymongo.MongoClient("mongodb+srv://dbUser:system@cluster0.5hlez.mongodb.net/Finder?retryWrites=true&w=majority")
+
 # Create your views here.
-def home(self):
-   myclient = pymongo.MongoClient("mongodb+srv://dbUser:system@cluster0.5hlez.mongodb.net/Finder?retryWrites=true&w=majority")
+@csrf_exempt
+def BuscarCurriculo(request, pk):
+
+   myclient = createConnection(self)
    mydb = myclient["Finder"]
    mycol = mydb["curriculo"]
 
-   myquery = { "nome": "arthur cardoso" }
+   myquery = { "_id": pk }
 
    mydoc = mycol.find(myquery)
 
    for x in mydoc:
       print(x)
-
    return HttpResponse("Curriculo encontrado com sucesso!")
-   # finder_instance = Finder()
-   
-   # myquery = { "nome": "arthur cardoso" }
-   # result = finder_instance.search(myquery)
 
-   # if result.count() == 0:
-   #    print("Nenhum curriculo encontrado...")
+def searchByCargo(self):
+   client = createConnection(self)
+   mydb = client["Finder"]
+   mycol = mydb["curriculo"]
 
-   # else:
-   #    for jsn in result:
-   #       print(jsn['_id'])
+   myquery = { "Exp.cargo" : "tecnico" } 
+
+   mydoc = mycol.find(myquery)
+
+   return HttpResponse(mydoc)
+
+@csrf_exempt
+def buscarPorVaga(request,VagaID):
+
+   if request.method == 'GET':
+      # Inicia conexão com o banco
+      client = createConnection()
+
+      mydb = client["Finder"]
+      curriculos = mydb["Inscrito"]
+      vagas = mydb["vagas"]
+
+
+      print(VagaID)
+      # Recupera a vaga recebida por parâmatro
+      vaga = vagas.find_one({"_id" : ObjectId(VagaID)})
+
+      if vaga:
+         searchRequisitos = '|'.join([str(requisito['descricao']) for requisito in vaga['competencia']])
+
+         query = {
+            "$or" : [ 
+               # { "tipoContratoDesejadoInscrito" : { "$regex": vaga['tipoContratacaoPerfilVaga'] } },
+               { "perfilProfissionalTituloInscrito" : { "$regex":searchRequisitos } },
+               { "perfilProfissionalDescricaoInscrito" : { "$regex": searchRequisitos } },
+               { "experienciaProfissional.descricao": { "$regex": searchRequisitos } },
+               { "formacao.curso": { "$regex": searchRequisitos } },
+               { "competencia.descricao": { "$regex": searchRequisitos } } 
+            ] 
+         }
+
+         result_curriculos = curriculos.find(query)
+
+         if result_curriculos:
+            IdCol = [str(result['_id']) for result in result_curriculos]
+            return JsonResponse({
+                                 "candidatos" : IdCol,
+                                 "message" : ""
+                              })
+         else:
+            return JsonResponse({
+                                 "candidatos" : [],
+                                 "message" : "Nenhum candidato encontrado para esta vaga."
+                              }, status=200)
+      else:
+         return JsonResponse({"message" : "Vaga não encontrada"}, status=200)
+   else:
+      return JsonResponse({"message": "Erro na requisição. Método esperado GET."}, status=500)
 
 @csrf_exempt
 def buscarvaga(request):
@@ -54,6 +108,7 @@ def buscarvaga(request):
          for x in mydoc:
             print(x)
    return HttpResponse("Vaga encontrada com sucesso!")
+<<<<<<< HEAD
 
 @csrf_exempt
 def updatevaga(request, id):
@@ -69,12 +124,14 @@ def updatevaga(request, id):
             print(x)
 
    return HttpResponse("Vaga atualizada com sucesso!")
+=======
+>>>>>>> a5e2a788ef2a2af4ae6c41c5cd0e0f1aefab9592
 
 @csrf_exempt
 def CadastrarCurriculo(request):
 
    if request.method == "POST":
-         myclient = pymongo.MongoClient("mongodb+srv://dbUser:system@cluster0.5hlez.mongodb.net/Finder?retryWrites=true&w=majority")
+         myclient = createConnection(self)         
          mydb = myclient["Finder"]
          mycol = mydb["curriculo"]
 
@@ -83,15 +140,32 @@ def CadastrarCurriculo(request):
 
    return HttpResponse("Curriculo cadastrado com sucesso!")
 
-@csrf_exempt
-def AtualizarCurriculo(request):
 
-   if request.method == 'POST':
+@csrf_exempt
+def AtualizarCurriculo(request, pk):
+
+   if request.method == "POST":
+         myclient = pymongo.MongoClient("mongodb+srv://dbUser:system@cluster0.5hlez.mongodb.net/Finder?retryWrites=true&w=majority")
+         mydb = myclient["Finder"]
+         mycol = mydb["curriculo"]
+
+
+         myquery = { "_id": pk }
+         newvalues = json.loads(request.body)
+
+         mycol.update_one(myquery, newvalues)
+
+   return HttpResponse("Curriculo atualizar com sucesso!")
+
+
+@csrf_exempt
+def DeletarCurriculo(request, pk):
+   if request.method == "POST":
       myclient = pymongo.MongoClient("mongodb+srv://dbUser:system@cluster0.5hlez.mongodb.net/Finder?retryWrites=true&w=majority")
       mydb = myclient["Finder"]
       mycol = mydb["curriculo"]
 
-      updatecurriculo = json.loads(request.body)
-      mydoc = mycol.update_one(updatecurriculo)
+      myquery = { "_id": pk}
+      mycol.delete_one(myquery)
 
-   return HttpResponse("Curriculo atualizado com sucesso!")
+   return HttpResponse("Curriculo excluído!")
