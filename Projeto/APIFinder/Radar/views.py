@@ -108,7 +108,6 @@ def buscarvaga(request):
          for x in mydoc:
             print(x)
    return HttpResponse("Vaga encontrada com sucesso!")
-<<<<<<< HEAD
 
 @csrf_exempt
 def updatevaga(request, id):
@@ -124,8 +123,7 @@ def updatevaga(request, id):
             print(x)
 
    return HttpResponse("Vaga atualizada com sucesso!")
-=======
->>>>>>> a5e2a788ef2a2af4ae6c41c5cd0e0f1aefab9592
+
 
 @csrf_exempt
 def CadastrarCurriculo(request):
