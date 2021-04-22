@@ -1,12 +1,18 @@
-from django.shortcuts import render
-from .Finder import *
+
 import json
 import pymongo
-from pymongo import MongoClient
 import dns
+
+from .Finder import *
+
+from pymongo import MongoClient
+
+from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+
+from bson import ObjectId
 from bson.json_util import dumps
 from bson.objectid import ObjectId
 
@@ -107,6 +113,24 @@ def buscarvaga(request):
          mydoc = mycol.find(myquery)
          for x in mydoc:
             print(x)
+   return HttpResponse("Achou!")
+  
+@csrf_exempt
+def insert_vaga(request):
+   if request.method == "POST":
+      myclient = pymongo.MongoClient("mongodb+srv://dbUser:system@cluster0.5hlez.mongodb.net/Finder?retryWrites=true&w=majority")
+      mydb = myclient["Finder"]
+      mycol = mydb["vaga"]
+      insert = json.loads(request.body)
+      aux = mycol.insert_one(insert)
+      return HttpResponse("Vaga cadastrada!")
+
+@csrf_exempt
+def delete_vaga(request, pk):
+   if request.method == "DELETE":
+      myclient = pymongo.MongoClient("mongodb+srv://dbUser:system@cluster0.5hlez.mongodb.net/Finder?retryWrites=true&w=majority")
+      mydb = myclient["Finder"]
+      mycol = mydb["vaga"]
    return HttpResponse("Vaga encontrada com sucesso!")
 
 @csrf_exempt
@@ -124,7 +148,6 @@ def updatevaga(request, id):
 
    return HttpResponse("Vaga atualizada com sucesso!")
 
-
 @csrf_exempt
 def CadastrarCurriculo(request):
 
@@ -137,7 +160,6 @@ def CadastrarCurriculo(request):
          mydoc = mycol.insert_one(newcurriculo)
 
    return HttpResponse("Curriculo cadastrado com sucesso!")
-
 
 @csrf_exempt
 def AtualizarCurriculo(request, pk):
@@ -155,7 +177,6 @@ def AtualizarCurriculo(request, pk):
 
    return HttpResponse("Curriculo atualizar com sucesso!")
 
-
 @csrf_exempt
 def DeletarCurriculo(request, pk):
    if request.method == "POST":
@@ -166,4 +187,8 @@ def DeletarCurriculo(request, pk):
       myquery = { "_id": pk}
       mycol.delete_one(myquery)
 
+      return HttpResponse("Vaga excluida!")
+      
+#  context = {'task': task}
+#  return render(request, 'bridges_app/delete_tarefa.html', context)
    return HttpResponse("Curriculo excluído!")
