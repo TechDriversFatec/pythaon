@@ -131,7 +131,12 @@ def delete_vaga(request, pk):
       myclient = pymongo.MongoClient("mongodb+srv://dbUser:system@cluster0.5hlez.mongodb.net/Finder?retryWrites=true&w=majority")
       mydb = myclient["Finder"]
       mycol = mydb["vaga"]
-   return HttpResponse("Vaga encontrada com sucesso!")
+
+      myquery = { "_id": pk}
+      mycol.delete_one(myquery)
+
+      return HttpResponse("Vaga excluida!")
+
 
 @csrf_exempt
 def updatevaga(request, id):
