@@ -56,6 +56,11 @@ Nossa proposta é desenvolver um sistema para a otimização e que facilite o pr
 
 
 #### Sprint 03
+| Requisito           | Status |  
+| ----------------------------------|---------|
+| Criar buscas de currículos por parâmetros | Em andamento |
+| Criar buscas por geolocalização | Em andamento |
+| Atualizar estruturas e cadastros para receber geolocalização | Em andamento |
 
 #### Sprint 04
 
@@ -106,6 +111,271 @@ Nossa proposta é desenvolver um sistema para a otimização e que facilite o pr
 ```
 ## Documentação da API
 
+<details>
+<summary>/buscarvaga_vaga/[Id da Vaga]/</summary>
+Busca uma vaga por id.
+<p>Response 200:</p>
+
+``` json
+{
+    "VagaIdExterno":"1",
+    "tituloVaga":"desc da vaga",
+    "tipoContratacaoPerfilVaga":"clt",
+    "tipoJornadaPerfilVaga":"liberal",
+    "localEnderecoCEPPerfilVaga":"12345-111",
+    "localEnderecoPerfilVaga":"rua, bairro",
+    "localEnderecoNumeroPerfilVaga":"1234",
+    "faixaEtariaInicioPerfilVaga":"21",
+    "faixaEtariaFimPerfilVaga":"35",
+    "tempoExperienciaPerfilVaga":"2 anos",
+    "faixaSalarioInicioPerfilVaga":"2500.00",
+    "dataInicioDivulgacaoPerfilVaga":"01/1/2021",
+    "datafinaldivulgacaoPerfilVaga":"31/01/2021",
+    "competencia": [
+        {
+         "descricao": "poliglota",
+        }
+    ],
+     "PalavraChave" :[
+         {
+            "DescricaoPalavraChave":"Chave",
+         }
+    ],
+}
+```
+</details>
+
+<details>
+<summary>/insert_vaga/</summary>
+Insere uma vaga.
+<p>Exemplo de parâmetro:</p>
+
+``` json
+{
+    "VagaIdExterno":"1",
+    "tituloVaga":"desc da vaga",
+    "tipoContratacaoPerfilVaga":"clt",
+    "tipoJornadaPerfilVaga":"liberal",
+    "localEnderecoCEPPerfilVaga":"12345-111",
+    "localEnderecoPerfilVaga":"rua, bairro",
+    "localEnderecoNumeroPerfilVaga":"1234",
+    "faixaEtariaInicioPerfilVaga":"21",
+    "faixaEtariaFimPerfilVaga":"35",
+    "tempoExperienciaPerfilVaga":"2 anos",
+    "faixaSalarioInicioPerfilVaga":"2500.00",
+    "dataInicioDivulgacaoPerfilVaga":"01/1/2021",
+    "datafinaldivulgacaoPerfilVaga":"31/01/2021",
+    "competencia": [
+        {
+         "descricao": "poliglota",
+        }
+    ],
+     "PalavraChave" :[
+         {
+            "DescricaoPalavraChave":"Chave",
+         }
+    ],
+}
+```
+<p>Response 200:</p>
+
+``` json
+{
+   "message": "Vaga inserida com sucesso"
+}
+```
+</details>
+
+<details>
+<summary>/update_vaga/</summary>
+Atualiza uma vaga já existente.
+<p>Exemplo de parâmetro:</p>
+
+``` json
+{
+    "VagaIdExterno":"1",
+    "tituloVaga":"desc da vaga",
+    "tipoContratacaoPerfilVaga":"clt",
+    "tipoJornadaPerfilVaga":"liberal",
+    "localEnderecoCEPPerfilVaga":"12345-123",
+    "localEnderecoPerfilVaga":"rua, bairro",
+    "localEnderecoNumeroPerfilVaga":"1234",
+    "faixaEtariaInicioPerfilVaga":"21",
+    "faixaEtariaFimPerfilVaga":"31",
+    "tempoExperienciaPerfilVaga":"1 anos",
+    "faixaSalarioInicioPerfilVaga":"2300.00",
+    "dataInicioDivulgacaoPerfilVaga":"01/1/2021",
+    "datafinaldivulgacaoPerfilVaga":"31/01/2021",
+    "competencia": [
+        {
+         "descricao": "poliglota",
+        }
+    ],
+     "PalavraChave" :[
+         {
+            "DescricaoPalavraChave":"Chave",
+         }
+    ],
+}
+```
+
+<p>Response 200:</p>
+
+``` json
+{
+   "message": "Vaga atualizada com sucesso"
+}
+```
+</details>
+
+<details>
+<summary>/delete_vaga/[Id da Vaga]/</summary>
+Exclui a vaga baseada no parâmetro, caso encontrada.
+<p>Response 200:</p>
+
+``` json
+{
+   "message": "Vaga excluída com sucesso"
+}
+```
+</details>
+
+<details>
+<summary>/cadastrar_curriculo/</summary>
+Cadastra um currículo.
+<p>Exemplo de parâmetro:</p>
+
+``` json
+{
+    "InscritoIdExterno":"1",
+    "rgInscrito":"123.123.123-12",
+    "dataNascimentoInscrito":"25/09/2000",
+    "sexoInscrito":"masculino",
+    "telefoneCelularInscrito":"(12)981612345",
+    "jornadaDesejadaInscrito":"padrão",
+    "tipoContratoDesejadoInscrito":"clt",
+    "EmailInscrito":"email@email.com",
+    "perfilProfissionalTituloInscrito":"full stack developer",
+    "perfilProfissionalDescricaoInscrito":"pleno com conhecimento em desenvolvimento full stack com node, dotnet, angular e react",
+    "nomeCompletoInscrito":"arthur c",
+    "enderecoCEPInscrito":"12345-608",
+    "enderecoLocalizacaoInscrito":"rua, bairro",
+    "complementoInscrito":"",
+    "enderecoLocalizacaoLatitudeInscrito":"",
+    "enderecoLocalizacaoLongitudeInscrito":"",
+
+    "experienciaProfissional": [
+        {
+         "descricao": "Desenvolvimento com front e back end",
+         "duracaoTempoExperiencia":"2 anos",
+         }
+      ],
+
+      "competencia": [
+        {
+         "descricao": "poliglota",
+        }
+      ],
+
+    "formacao": [
+        {
+            "curso":"banco de dados",
+            "Dataformacao":"22/06/2020",
+            "intituicao":"fatec"
+        }
+      ],
+}
+```
+<p>Response 200:</p>
+
+``` json
+{
+   "message": "Currículo inserida com sucesso"
+}
+```
+</details>
+
+<details>
+<summary>/atualizar_curriculo/[Id do currículo]</summary>
+Atualiza um currículo.
+<p>Exemplo de parâmetro:</p>
+
+``` json
+{
+    "InscritoIdExterno":"1",
+    "rgInscrito":"123.123.123-12",
+    "dataNascimentoInscrito":"25/09/2000",
+    "sexoInscrito":"masculino",
+    "telefoneCelularInscrito":"(12)981612345",
+    "jornadaDesejadaInscrito":"padrão",
+    "tipoContratoDesejadoInscrito":"clt",
+    "EmailInscrito":"email@email.com",
+    "perfilProfissionalTituloInscrito":"full stack developer",
+    "perfilProfissionalDescricaoInscrito":"pleno com conhecimento em desenvolvimento full stack com node, dotnet, angular e react",
+    "nomeCompletoInscrito":"arthur c",
+    "enderecoCEPInscrito":"12345-608",
+    "enderecoLocalizacaoInscrito":"rua, bairro",
+    "complementoInscrito":"",
+    "enderecoLocalizacaoLatitudeInscrito":"",
+    "enderecoLocalizacaoLongitudeInscrito":"",
+
+    "experienciaProfissional": [
+        {
+         "descricao": "Desenvolvimento com front e back end",
+         "duracaoTempoExperiencia":"1 anos",
+         }
+      ],
+
+      "competencia": [
+        {
+         "descricao": "poliglota",
+        }
+      ],
+
+    "formacao": [
+        {
+            "curso":"banco de dados",
+            "Dataformacao":"22/06/2020",
+            "intituicao":"fatec"
+        }
+      ],
+}
+```
+<p>Response 200:</p>
+
+``` json
+{
+   "message": "Currículo atualizado com sucesso"
+}
+```
+</details>
+
+<details>
+<summary>/deletar_curriculo/[Id do currículo]/</summary>
+Exclui o currículo baseado no parâmetro, caso encontrado.
+<p>Response 200:</p>
+
+``` json
+{
+   "message": "Currículo Excluído com sucesso"
+}
+```
+</details>
+
+<details>
+<summary>/buscaPorVaga/[Id da Vaga]/</summary>
+Realiza uma busca por currículo baseada na vaga enviada por parâmetro e retorna os ids dos candidatos.
+<p>Response 200:</p>
+
+``` json
+{
+    "candidatos": [
+        "123","433","54","1123"
+    ],
+    "message": ""
+}
+```
+</details>
 
 ## Tecnologias Utilizadas:
 * Python/Django
