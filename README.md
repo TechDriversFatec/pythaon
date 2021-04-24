@@ -70,49 +70,82 @@ Nossa proposta é desenvolver um sistema para a otimização e que facilite o pr
 **Vaga**
 ```json
 {
-   "vigenciaDataInicial":"01/01/2021",
-   "vigenciaDataFinal":"31/12/2021",
-   "urgencia":"baixa",
-   "requisitos":[
-      {
-         "desc":"Tecnico em informatica"
-      }
-   ],
-   "endereco":[],
-   "contato":[]
+    "VagaIdExterno":"1",
+    "tituloVaga":"desc da vaga",
+    "tipoContratacaoPerfilVaga":"clt",
+    "tipoJornadaPerfilVaga":"liberal",
+    "localEnderecoCEPPerfilVaga":"12345-600",
+    "localEnderecoPerfilVaga":"rua, bairro",
+    "localEnderecoNumeroPerfilVaga":"1234",
+    "faixaEtariaInicioPerfilVaga":"21",
+    "faixaEtariaFimPerfilVaga":"35",
+    "tempoExperienciaPerfilVaga":"2 anos",
+    "faixaSalarioInicioPerfilVaga":"2500.00",
+    "dataInicioDivulgacaoPerfilVaga":"01/1/2021",
+    "datafinaldivulgacaoPerfilVaga":"31/01/2021",
+
+    "competencia": [
+        {
+         "descricao": "poliglota",
+        }
+    ],
+
+     "PalavraChave" :[
+         {
+            "DescricaoPalavraChave":"Chave",
+         }
+    ],
 }
 ```
 
 **Currículo**
 ```json
 {
-  "nome":"arthur cardoso",
-  "dataNasc":"25/09/00",
-  "rg":"37.715.750-8",
-  "formacao" : [
-   {
-      "desc" : "tecnico informatica",
-      "instituicao": "instituicao",
-      "concluido":"01/01/2021",
-      "previaConclusao":"???"
-    }
-  ],
-  "exp":[
-     {
-      "cargo":"Tecnico em informatica",
-      "desc":"Tecnico informatica e suporte",
-      "dataInicio":"01/01/2021",
-      "dataFinal":""
-    }
-  ],
-  "endereco":[],
-  "contato":[]
+    "InscritoIdExterno":"1",
+    "rgInscrito":"123.123.123-12",
+    "dataNascimentoInscrito":"25/09/2000",
+    "sexoInscrito":"masculino",
+    "telefoneCelularInscrito":"(12)12344321",
+    "jornadaDesejadaInscrito":"padrão",
+    "tipoContratoDesejadoInscrito":"clt",
+    "EmailInscrito":"email@email.com",
+    "perfilProfissionalTituloInscrito":"full stack developer",
+    "perfilProfissionalDescricaoInscrito":"pleno com conhecimento em desenvolvimento full stack com node, dotnet, angular e react",
+    "nomeCompletoInscrito":"arthur c",
+    "enderecoCEPInscrito":"12345-608",
+    "enderecoLocalizacaoInscrito":"rua, bairro",
+    "complementoInscrito":"",
+    "enderecoLocalizacaoLatitudeInscrito":"",
+    "enderecoLocalizacaoLongitudeInscrito":"",
+
+    "experienciaProfissional": [
+        {
+         "descricao": "Desenvolvimento com front e back end",
+         "duracaoTempoExperiencia":"2 anos",
+         }
+      ],
+
+      "competencia": [
+        {
+         "descricao": "poliglota",
+        }
+      ],
+
+    "formacao": [
+        {
+            "curso":"banco de dados",
+            "Dataformacao":"22/06/2020",
+            "intituicao":"fatec"
+        }
+      ],
 }
 ```
 ## Documentação da API
+<details >
+<summary>
+<b>🟦GET</b>  /buscarvaga_vaga/[Id da Vaga]/ 
+</summary>
 
-<details>
-<summary>/buscarvaga_vaga/[Id da Vaga]/</summary>
 Busca uma vaga por id.
 <p>Response 200:</p>
 
@@ -146,7 +179,9 @@ Busca uma vaga por id.
 </details>
 
 <details>
-<summary>/insert_vaga/</summary>
+<summary>
+<b>🟩POST</b> /insert_vaga/
+</summary>
 Insere uma vaga.
 <p>Exemplo de parâmetro:</p>
 
@@ -187,7 +222,9 @@ Insere uma vaga.
 </details>
 
 <details>
-<summary>/update_vaga/</summary>
+<summary>
+<b>🟩POST</b> /update_vaga/
+</summary>
 Atualiza uma vaga já existente.
 <p>Exemplo de parâmetro:</p>
 
@@ -229,7 +266,9 @@ Atualiza uma vaga já existente.
 </details>
 
 <details>
-<summary>/delete_vaga/[Id da Vaga]/</summary>
+<summary>
+<b>🟥DELETE</b> /delete_vaga/[Id da Vaga]/
+</summary>
 Exclui a vaga baseada no parâmetro, caso encontrada.
 <p>Response 200:</p>
 
@@ -241,7 +280,15 @@ Exclui a vaga baseada no parâmetro, caso encontrada.
 </details>
 
 <details>
-<summary>/cadastrar_curriculo/</summary>
+<summary>
+<b>🟦GET</b>  /buscaCurriculo/[Id do currículo]/
+</summary>
+</details>
+
+<details>
+<summary>
+<b>🟩POST</b> /cadastrar_curriculo/
+</summary>
 Cadastra um currículo.
 <p>Exemplo de parâmetro:</p>
 
@@ -296,7 +343,9 @@ Cadastra um currículo.
 </details>
 
 <details>
-<summary>/atualizar_curriculo/[Id do currículo]</summary>
+<summary>
+<b>🟩POST</b> /atualizar_curriculo/[Id do currículo]
+</summary>
 Atualiza um currículo.
 <p>Exemplo de parâmetro:</p>
 
@@ -351,7 +400,9 @@ Atualiza um currículo.
 </details>
 
 <details>
-<summary>/deletar_curriculo/[Id do currículo]/</summary>
+<summary>
+<b>🟥DELETE</b> /deletar_curriculo/[Id do currículo]/
+</summary>
 Exclui o currículo baseado no parâmetro, caso encontrado.
 <p>Response 200:</p>
 
@@ -363,7 +414,9 @@ Exclui o currículo baseado no parâmetro, caso encontrado.
 </details>
 
 <details>
-<summary>/buscaPorVaga/[Id da Vaga]/</summary>
+<summary>
+<b>🟦GET</b>  /buscaPorVaga/[Id da Vaga]/
+</summary>
 Realiza uma busca por currículo baseada na vaga enviada por parâmetro e retorna os ids dos candidatos.
 <p>Response 200:</p>
 
