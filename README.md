@@ -143,7 +143,7 @@ Nossa proposta é desenvolver um sistema para a otimização e que facilite o pr
 ## Documentação da API
 <details >
 <summary>
-<b>🟦GET</b>  /buscarvaga_vaga/[Id da Vaga]/ 
+<b>🟦GET</b>  /buscar_vaga/[Id da Vaga]/ 
 </summary>
 
 Busca uma vaga por id.
@@ -180,7 +180,7 @@ Busca uma vaga por id.
 
 <details>
 <summary>
-<b>🟩POST</b> /insert_vaga/
+<b>🟩POST</b> /inserir_vaga
 </summary>
 Insere uma vaga.
 <p>Exemplo de parâmetro:</p>
@@ -223,7 +223,7 @@ Insere uma vaga.
 
 <details>
 <summary>
-<b>🟩POST</b> /update_vaga/
+<b>🟩POST</b> /atualizar_vaga
 </summary>
 Atualiza uma vaga já existente.
 <p>Exemplo de parâmetro:</p>
@@ -267,7 +267,7 @@ Atualiza uma vaga já existente.
 
 <details>
 <summary>
-<b>🟥DELETE</b> /delete_vaga/[Id da Vaga]/
+<b>🟥DELETE</b> /excluir_vaga/[Id da Vaga]
 </summary>
 Exclui a vaga baseada no parâmetro, caso encontrada.
 <p>Response 200:</p>
@@ -281,13 +281,56 @@ Exclui a vaga baseada no parâmetro, caso encontrada.
 
 <details>
 <summary>
-<b>🟦GET</b>  /buscaCurriculo/[Id do currículo]/
+<b>🟦GET</b> /buscar_curriculo/[Id do currículo]
 </summary>
+
+<p>Response 200:</p>
+``` json
+{
+    "InscritoIdExterno":"1",
+    "rgInscrito":"123.123.123-12",
+    "dataNascimentoInscrito":"25/09/2000",
+    "sexoInscrito":"masculino",
+    "telefoneCelularInscrito":"(12)91231235",
+    "jornadaDesejadaInscrito":"padrão",
+    "tipoContratoDesejadoInscrito":"clt",
+    "EmailInscrito":"email@email.com",
+    "perfilProfissionalTituloInscrito":"full stack developer",
+    "perfilProfissionalDescricaoInscrito":"pleno com conhecimento em desenvolvimento full stack com node, dotnet, angular e react",
+    "nomeCompletoInscrito":"arthur c",
+    "enderecoCEPInscrito":"12345-608",
+    "enderecoLocalizacaoInscrito":"rua, bairro",
+    "complementoInscrito":"",
+    "enderecoLocalizacaoLatitudeInscrito":"",
+    "enderecoLocalizacaoLongitudeInscrito":"",
+
+    "experienciaProfissional": [
+        {
+         "descricao": "Desenvolvimento com front e back end",
+         "duracaoTempoExperiencia":"2 anos",
+         }
+      ],
+
+      "competencia": [
+        {
+         "descricao": "poliglota",
+        }
+      ],
+
+    "formacao": [
+        {
+            "curso":"banco de dados",
+            "Dataformacao":"22/06/2020",
+            "intituicao":"fatec"
+        }
+      ],
+}
+```
 </details>
 
 <details>
 <summary>
-<b>🟩POST</b> /cadastrar_curriculo/
+<b>🟩POST</b> /inserir_curriculo
 </summary>
 Cadastra um currículo.
 <p>Exemplo de parâmetro:</p>
@@ -401,7 +444,7 @@ Atualiza um currículo.
 
 <details>
 <summary>
-<b>🟥DELETE</b> /deletar_curriculo/[Id do currículo]/
+<b>🟥DELETE</b> /excluir_curriculo/[Id do currículo]
 </summary>
 Exclui o currículo baseado no parâmetro, caso encontrado.
 <p>Response 200:</p>
@@ -415,7 +458,7 @@ Exclui o currículo baseado no parâmetro, caso encontrado.
 
 <details>
 <summary>
-<b>🟦GET</b>  /buscaPorVaga/[Id da Vaga]/
+<b>🟦GET</b> /buscaPorVaga/[Id da Vaga]
 </summary>
 Realiza uma busca por currículo baseada na vaga enviada por parâmetro e retorna os ids dos candidatos.
 <p>Response 200:</p>
