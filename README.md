@@ -285,6 +285,7 @@ Exclui a vaga baseada no parâmetro, caso encontrada.
 </summary>
 
 <p>Response 200:</p>
+
 ``` json
 {
     "InscritoIdExterno":"1",
@@ -303,20 +304,17 @@ Exclui a vaga baseada no parâmetro, caso encontrada.
     "complementoInscrito":"",
     "enderecoLocalizacaoLatitudeInscrito":"",
     "enderecoLocalizacaoLongitudeInscrito":"",
-
     "experienciaProfissional": [
         {
          "descricao": "Desenvolvimento com front e back end",
          "duracaoTempoExperiencia":"2 anos",
          }
       ],
-
       "competencia": [
         {
          "descricao": "poliglota",
         }
       ],
-
     "formacao": [
         {
             "curso":"banco de dados",
