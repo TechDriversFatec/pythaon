@@ -223,7 +223,7 @@ Insere uma vaga.
 
 <details>
 <summary>
-<b>🟩POST</b> /atualizar_vaga
+<b>🟧PUT</b> /atualizar_vaga/[Id da Vaga]/ 
 </summary>
 Atualiza uma vaga já existente.
 <p>Exemplo de parâmetro:</p>
@@ -380,14 +380,14 @@ Cadastra um currículo.
 
 ``` json
 {
-   "message": "Currículo inserida com sucesso"
+   "message": "Currículo inserido com sucesso"
 }
 ```
 </details>
 
 <details>
 <summary>
-<b>🟩POST</b> /atualizar_curriculo/[Id do currículo]
+<b>🟧PUT</b> /atualizar_curriculo/[Id do currículo]
 </summary>
 Atualiza um currículo.
 <p>Exemplo de parâmetro:</p>
