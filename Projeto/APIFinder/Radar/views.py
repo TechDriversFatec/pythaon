@@ -6,7 +6,6 @@ from geopy.geocoders import Nominatim
 from math import sin, cos, sqrt, atan2, radians
 from geopy import distance
 from haversine import haversine, Unit
-
 from .Finder import *
 
 from pymongo import MongoClient
@@ -22,6 +21,12 @@ from bson.objectid import ObjectId
         
 def createConnection():
    return pymongo.MongoClient("mongodb+srv://dbUser:system@cluster0.5hlez.mongodb.net/Finder?retryWrites=true&w=majority")
+
+def getAdressByCep(cep):
+   endereco = get_address_from_cep(cep, webservice=WebService.CORREIOS)
+   print(endereco['logradouro'] + ", " + endereco['cidade'])
+   geolocator = Nominatim(user_agent="APIFinder")
+   return geolocator.geocode(endereco['logradouro'] + ", " + endereco['cidade'] + " - " + endereco['bairro'])
 
 @csrf_exempt
 def buscarvaga(request, pk):
@@ -144,27 +149,29 @@ def buscarPorVagaVT0(request, VagaID):
       curriculos = db["Inscrito"]
 
       vaga = vaga.find_one({"VagaIdExterno" : VagaID})
-      
-      endereco_vaga = get_address_from_cep(vaga["localEnderecoCEPPerfilVaga"], webservice=WebService.CORREIOS)
-      geolocator_vaga = Nominatim(user_agent="test_app")
-      location_vaga = geolocator_vaga.geocode(endereco_vaga['logradouro'] + ", " + endereco_vaga['cidade'] + " - " + endereco_vaga['bairro'])
+      location_vaga = getAdressByCep(vaga["localEnderecoCEPPerfilVaga"])
 
+      if vaga['valeTransporte'] == 1:
+         return JsonResponse({"message" : "VT0 não é requisito para vaga"}, status=200)
+      if location_vaga == None:
+         return JsonResponse({"message" : "Vaga com CEP não identificado"}, status=200)
+         
       list = []
-
       if vaga:
-
          for curriculo in curriculos.find():
-            endereco_curriculo = get_address_from_cep(curriculo["enderecoCEPInscrito"], webservice=WebService.CORREIOS)
-            geolocator_curriculo = Nominatim(user_agent="test_app")
-            location_curriculo = geolocator_curriculo.geocode(endereco_curriculo['logradouro'] + ", " + endereco_curriculo['cidade'] + " - " + endereco_curriculo['bairro'])
-            coords_1 = (location_vaga.latitude, location_vaga.longitude)
-            coords_2 = (location_curriculo.latitude, location_curriculo.longitude)
-            if haversine(coords_1, coords_2) < 3:
-               list.append(curriculo)  
+            print(curriculo['InscritoIdExterno'])
+            location_curriculo = getAdressByCep(curriculo["enderecoCEPInscrito"])
+            if location_curriculo != None:
+               coords_1 = (location_vaga.latitude, location_vaga.longitude)
+               coords_2 = (location_curriculo.latitude, location_curriculo.longitude)
+               if haversine(coords_1, coords_2) < 3:
+                  list.append(curriculo)  
             
          IdCol = [str(result['_id']) for result in list]
+         IdExterno = [str(result['InscritoIdExterno']) for result in list]
          return JsonResponse({
-                              "candidatos" : IdCol,
+                              "ObjectID" : IdCol,
+                              "IdExterno": IdExterno,
                               "message" : ""
                            })
       else:
