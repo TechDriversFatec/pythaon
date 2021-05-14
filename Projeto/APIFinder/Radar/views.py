@@ -1,10 +1,11 @@
 import json
 import pymongo
 import dns
-import pycep_correios
+from pycep_correios import get_address_from_cep, WebService
 from geopy.geocoders import Nominatim
 from math import sin, cos, sqrt, atan2, radians
 from geopy import distance
+from haversine import haversine, Unit
 
 from .Finder import *
 
@@ -143,29 +144,35 @@ def buscarPorVagaVT0(request, VagaID):
       curriculos = db["Inscrito"]
 
       vaga = vaga.find_one({"VagaIdExterno" : VagaID})
-      endereco_vaga = pycep_correios.get_address_from_cep(vaga["localEnderecoCEPPerfilVaga"])
+      
+      endereco_vaga = get_address_from_cep(vaga["localEnderecoCEPPerfilVaga"], webservice=WebService.CORREIOS)
       geolocator_vaga = Nominatim(user_agent="test_app")
       location_vaga = geolocator_vaga.geocode(endereco_vaga['logradouro'] + ", " + endereco_vaga['cidade'] + " - " + endereco_vaga['bairro'])
-      db.places.f
 
-      VT = vaga['ValeTransporte']
+      list = []
+
       if vaga:
+
          for curriculo in curriculos.find():
-            endereco_curriculo = pycep_correios.get_address_from_cep(curriculo["enderecoCEPInscrito"])
+            endereco_curriculo = get_address_from_cep(curriculo["enderecoCEPInscrito"], webservice=WebService.CORREIOS)
             geolocator_curriculo = Nominatim(user_agent="test_app")
             location_curriculo = geolocator_curriculo.geocode(endereco_curriculo['logradouro'] + ", " + endereco_curriculo['cidade'] + " - " + endereco_curriculo['bairro'])
-            print("a")
+            coords_1 = (location_vaga.latitude, location_vaga.longitude)
+            coords_2 = (location_curriculo.latitude, location_curriculo.longitude)
+            if haversine(coords_1, coords_2) < 3:
+               list.append(curriculo)  
             
-           # coords_1 = (52.2296756, 21.0122287)
-           # coords_2 = (52.406374, 16.9251681)
-           # print(distance.distance(coords_1, coords_2).km)
-
-         return JsonResponse(location_curriculo.latitude, safe=False)
+         IdCol = [str(result['_id']) for result in list]
+         return JsonResponse({
+                              "candidatos" : IdCol,
+                              "message" : ""
+                           })
       else:
          return JsonResponse({"message" : "Vaga não encontrada."}, status=200)
    else:
       return JsonResponse({"message": "Erro na requisição. Método esperado: GET."}, status=500)
-  
+  #            if list.count == 0:
+  #             return JsonResponse({"message" : "Vaga não encontrada."}, status=200)
 
 @csrf_exempt
 def buscarPorVaga(request,VagaID):
