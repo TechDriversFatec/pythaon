@@ -81,6 +81,19 @@ class View:
       else:
          return JsonResponse({"message":"Erro na requisição. Método esperado: PUT."}, status=500)  
 
+   def UpdateListCurriculos(IdCol, pk):
+      client = View.createConnection()
+      db = client["Finder"]
+      col = db["vagas"]
+
+      query = { "$set": { "IncritoIdSelecionado": IdCol }}
+
+      result = col.update_one({"VagaIdExterno" : pk}, query)
+
+      # result
+      return JsonResponse({"message":"Lista de curriculos selecionados atualizada com sucesso."}, status=200)
+      
+
    @csrf_exempt
    def delete_vaga(request, pk):
       if request.method == "DELETE":
@@ -162,7 +175,7 @@ class View:
          vagas = mydb["vagas"]
 
          # Recupera a vaga recebida por parâmetro
-         vaga = vagas.find_one({"_id" : ObjectId(VagaID)})
+         vaga = vagas.find_one({"VagaIdExterno" : VagaID})
 
          if vaga:
             searchRequisitos = '|'.join([str(requisito['descricao']) for requisito in vaga['competencia']])
@@ -182,6 +195,8 @@ class View:
 
             if result_curriculos:
                IdCol = [str(result['_id']) for result in result_curriculos]
+
+               View.UpdateListCurriculos(IdCol, VagaID)
                return JsonResponse({
                                     "candidatos" : IdCol,
                                     "message" : ""
@@ -223,8 +238,9 @@ class View:
          }
 
          result_curriculos = curriculos.find(query)
+         IdCol = [str(result['_id']) for result in result_curriculos]
      
-      return result_curriculos
+      return IdCol
 
    def BuscaCurriculoxVaga(IdCurriculo):
 

@@ -33,7 +33,7 @@ class Observer:
 		print("Finished!")
  
 	def UpdateObserver(IDVaga, results):
-		#views.View.updatevaga(results, IDVaga)
+		views.View.UpdateListCurriculos(results, IDVaga)
 		print("Função para add curriculo a collection")
 		print(dumps(results))
 
