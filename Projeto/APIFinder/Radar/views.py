@@ -147,16 +147,13 @@ def buscarPorVagaVT0(request,VagaID):
       db = client["Finder"]
       vaga = db["vagas"]
       curriculos = db["Inscrito"]
-
-      vaga = vaga.find_one({"VagaIdExterno" : VagaID})
-      
+      vaga = vaga.find_one({"VagaIdExterno" : VagaID})  
       query = { 
          "$or" : [
          {"coordenadas": {"$near": {"$maxDistance": 3000, "$geometry":{"type": "Point", "coordinates":[vaga['coordenadas']['coordinates'][0], vaga['coordenadas']['coordinates'][1]]}}}}
          ]
        }
       result_curriculos = curriculos.find(query)
-
       if result_curriculos:
          IdCol = [str(result['_id']) for result in result_curriculos]
          IdExterno = [str(result['InscritoIdExterno']) for result in result_curriculos]
