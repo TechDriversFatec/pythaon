@@ -141,7 +141,7 @@ def deletarCurriculo(request, pk):
       return JsonResponse({"message" : "Erro na requisição. Método esperado: DELETE."}, status=500)   
 
 @csrf_exempt
-def buscarPorVagaVT0(request, VagaID):
+def buscarPorVagaVT0(request,VagaID):
    if request.method == 'GET':
       client = createConnection()
       db = client["Finder"]
@@ -149,37 +149,31 @@ def buscarPorVagaVT0(request, VagaID):
       curriculos = db["Inscrito"]
 
       vaga = vaga.find_one({"VagaIdExterno" : VagaID})
-      location_vaga = getAdressByCep(vaga["localEnderecoCEPPerfilVaga"])
+      
+      query = { 
+         "$or" : [
+         {"coordenadas": {"$near": {"$maxDistance": 3000, "$geometry":{"type": "Point", "coordinates":[vaga['coordenadas']['coordinates'][0], vaga['coordenadas']['coordinates'][1]]}}}}
+         ]
+       }
+      result_curriculos = curriculos.find(query)
 
-      if vaga['valeTransporte'] == 1:
-         return JsonResponse({"message" : "VT0 não é requisito para vaga"}, status=200)
-      if location_vaga == None:
-         return JsonResponse({"message" : "Vaga com CEP não identificado"}, status=200)
-         
-      list = []
-      if vaga:
-         for curriculo in curriculos.find():
-            print(curriculo['InscritoIdExterno'])
-            location_curriculo = getAdressByCep(curriculo["enderecoCEPInscrito"])
-            if location_curriculo != None:
-               coords_1 = (location_vaga.latitude, location_vaga.longitude)
-               coords_2 = (location_curriculo.latitude, location_curriculo.longitude)
-               if haversine(coords_1, coords_2) < 3:
-                  list.append(curriculo)  
-            
-         IdCol = [str(result['_id']) for result in list]
-         IdExterno = [str(result['InscritoIdExterno']) for result in list]
+      if result_curriculos:
+         IdCol = [str(result['_id']) for result in result_curriculos]
+         IdExterno = [str(result['InscritoIdExterno']) for result in result_curriculos]
          return JsonResponse({
-                              "ObjectID" : IdCol,
-                              "IdExterno": IdExterno,
-                              "message" : ""
-                           })
+                  "candidatos" : IdCol,
+                  "IdExterno" : IdExterno,
+                  "message" : ""
+                  })
       else:
-         return JsonResponse({"message" : "Vaga não encontrada."}, status=200)
+         return JsonResponse({
+                  "candidatos" : [],
+                  "message" : "Nenhum candidato encontrado para esta vaga."
+                  }, status=200)
+
+      return JsonResponse({"message" : "Vaga não encontrada."}, status=200)
    else:
-      return JsonResponse({"message": "Erro na requisição. Método esperado: GET."}, status=500)
-  #            if list.count == 0:
-  #             return JsonResponse({"message" : "Vaga não encontrada."}, status=200)
+      return JsonResponse({"message" : "Vaga não encontrada."}, status=200)
 
 @csrf_exempt
 def buscarPorVaga(request,VagaID):
