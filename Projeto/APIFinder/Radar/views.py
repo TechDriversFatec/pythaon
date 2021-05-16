@@ -55,8 +55,7 @@ class View:
          result = col.insert_one(vaga)
 
          IdVaga = vaga.get("VagaIdExterno")
-         print(IdVaga)
-         
+
          Observer.registerObserver(IdVaga)
 
          #Vaga.Observer().registerObserver(request['VagaIdExterno'])
@@ -124,15 +123,14 @@ class View:
          return JsonResponse({"message": "Erro na requisição. Método esperado: GET."}, status=500)
 
    @csrf_exempt
-   def cadastrarCurriculo(self, request):
+   def cadastrarCurriculo(request):
       if request.method == "POST":
          client = View.createConnection()         
          db = client["Finder"]
          col = db["Inscrito"]
 
          result = col.insert_one(json.loads(request.body))
-
-         self.observer_vaga.notifyObserver(request['InscritoIdExterno'])
+         
          # result
          return JsonResponse({"message":"Curriculo inserido com sucesso."}, status=200)
       else:

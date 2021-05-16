@@ -19,6 +19,7 @@ class Observer:
         
 
 	def registerObserver(IdVaga):
+		views.View.CurriculosList(IdVaga)
 		Observer.observers.append(IdVaga)
 		print("Observer added!")
 
