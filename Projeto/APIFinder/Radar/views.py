@@ -21,7 +21,7 @@ from django.views.decorators.csrf import csrf_exempt
 from bson import ObjectId
 from bson.json_util import dumps
 from bson.objectid import ObjectId
-        
+
 def createConnection():
    return pymongo.MongoClient("mongodb+srv://dbUser:system@cluster0.5hlez.mongodb.net/Finder?retryWrites=true&w=majority")
 
@@ -272,6 +272,37 @@ class View:
             return JsonResponse({"message" : "Vaga não encontrada"}, status=200)
       else:
          return JsonResponse({"message": "Erro na requisição. Método esperado: GET."}, status=500)
+
+   def CurriculosList(VagaID):
+            # Inicia conexão com o banco
+      client = View.createConnection()
+
+      mydb = client["Finder"]
+      curriculos = mydb["Inscrito"]
+      vagas = mydb["vagas"]
+
+      # Recupera a vaga recebida por parâmetro
+      vaga = vagas.find_one({"VagaIdExterno" : VagaID})
+
+      if vaga:
+         searchRequisitos = '|'.join([str(requisito['descricao']) for requisito in vaga['competencia']])
+
+         query = {
+            "$or" : [ 
+               # { "tipoContratoDesejadoInscrito" : { "$regex": vaga['tipoContratacaoPerfilVaga'] } },
+               { "perfilProfissionalTituloInscrito" : { "$regex":searchRequisitos } },
+               { "perfilProfissionalDescricaoInscrito" : { "$regex": searchRequisitos } },
+               { "experienciaProfissional.descricao": { "$regex": searchRequisitos } },
+               { "formacao.curso": { "$regex": searchRequisitos } },
+               { "competencia.descricao": { "$regex": searchRequisitos } } 
+            ] 
+         }
+
+         result_curriculos = curriculos.find(query)
+         IdCol = [str(result['_id']) for result in result_curriculos]
+     
+      return IdCol
+
 
 @csrf_exempt
 def buscarPorVagaVT0(request,VagaID):
