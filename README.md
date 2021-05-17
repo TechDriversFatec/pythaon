@@ -469,18 +469,18 @@ Realiza uma busca por currículo baseada na vaga enviada por parâmetro e retorn
 <summary>
 <b>🟦GET</b> /busca_Filtrada
 </summary>
-<p>Recebe um array de parâmetros dinâmicos e executa uma busca no banco de dados.</p>
-<p>A busca pode receber parâmetros de três tipos: Texto, data e localização.</p>
+<p>Recebe um array de parâmetros dinâmicos e executa uma busca no banco de dados.<br>
+A busca pode receber parâmetros de três tipos: Texto, data e localização.</p>
 
 **Texto:**
-- "tipo" : Tipo de busca a ser realizada.
-- "chave": campo em que será realizada a busca. (String)
-- "valor": Campo que contém o conteúdo a ser buscado. Pode ser uma String ou um Array de String.(String|Array<String>)
+- "tipo"  : Tipo de busca a ser realizada.
+- "chave" : campo em que será realizada a busca. (String)
+- "valor" : Campo que contém o conteúdo a ser buscado. Pode ser uma String ou um Array de String.(String|Array<String>)
 
 **Localização:**
-- "tipo" : Tipo de busca a ser realizada.
-- "chave": campo em que será realizada a busca. (String)
-- "valor": Campo que contém as coordenadas do ponto central ao qual a busca será realizada.(Array<Float>)
+- "tipo"    : Tipo de busca a ser realizada.
+- "chave"   : campo em que será realizada a busca. (String)
+- "valor"   : Campo que contém as coordenadas do ponto central ao qual a busca será realizada.(Array<Float>)
 - "mindist" : Campo que contém a distância mínima necessária dos inscritos para o ponto central para entrar nas condições da busca.
 - "maxdist" : Campo que contém a distância máxima dos inscritos para o ponto central para entrar nas condições da busca.
 
@@ -489,12 +489,12 @@ Realiza uma busca por currículo baseada na vaga enviada por parâmetro e retorn
 - "chave": campo em que será realizada a busca. (String)
 - "operador": Campo que contém o parâmetro de data.(String)
 
-<p>Os operadores são funções para comparar determinado parâmetro. Os operadores aceitos na api são:</p>
+Os operadores são funções para comparar determinado parâmetro. Os operadores aceitos na api são:
 - eq  : Encontra valores que são iguais ao valor especificado
 - ne  : Encontra valores que são diferentes ao valor especificado
 - gt  : Encontra valores que são maiores ao valor especificado
-- gte :  Encontra valores que são maiores ou iguais ao valor especificado
-- lt  :  Encontra valores que são menores ao valor especificado
+- gte : Encontra valores que são maiores ou iguais ao valor especificado
+- lt  : Encontra valores que são menores ao valor especificado
 - lte : Encontra valores que são menores ou iguais ao valor especificado
 
 <p>Response 200:</p>
