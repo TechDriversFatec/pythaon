@@ -471,6 +471,7 @@ Realiza uma busca por currículo baseada na vaga enviada por parâmetro e retorn
 </summary>
 <p>Recebe um array de parâmetros dinâmicos e executa uma busca no banco de dados.</p>
 <p>A busca pode receber parâmetros de três tipos: Texto, data e localização.</p>
+
 **Texto: **
 - "tipo" : Tipo de busca a ser realizada.
 - "chave": campo em que será realizada a busca. (String)
@@ -487,6 +488,7 @@ Realiza uma busca por currículo baseada na vaga enviada por parâmetro e retorn
 - "tipo" : Tipo de busca a ser realizada.
 - "chave": campo em que será realizada a busca. (String)
 - "<Operador>*": Campo que contém o parâmetro de data.(String)
+
 <p>Os operadores são funções para comparar determinado parâmetro. Os operadores aceitos na api são:</p>
 - eq - Encontra valores que são iguais ao valor especificado
 - ne - Encontra valores que são diferentes ao valor especificado
