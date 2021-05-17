@@ -71,74 +71,67 @@ Nossa proposta é desenvolver um sistema para a otimização e que facilite o pr
 **Vaga**
 ```json
 {
-    "VagaIdExterno":"1",
-    "tituloVaga":"desc da vaga",
-    "tipoContratacaoPerfilVaga":"clt",
-    "tipoJornadaPerfilVaga":"liberal",
-    "localEnderecoCEPPerfilVaga":"12345-600",
-    "localEnderecoPerfilVaga":"rua, bairro",
-    "localEnderecoNumeroPerfilVaga":"1234",
-    "faixaEtariaInicioPerfilVaga":"21",
-    "faixaEtariaFimPerfilVaga":"35",
-    "tempoExperienciaPerfilVaga":"2 anos",
-    "faixaSalarioInicioPerfilVaga":"2500.00",
-    "dataInicioDivulgacaoPerfilVaga":"01/1/2021",
-    "datafinaldivulgacaoPerfilVaga":"31/01/2021",
-
-    "competencia": [
-        {
-         "descricao": "poliglota",
-        }
-    ],
-
-     "PalavraChave" :[
-         {
-            "DescricaoPalavraChave":"Chave",
-         }
-    ],
+    "VagaIdExterno": "11",
+    "tituloVaga": "Observer Inscrito Seleionado",
+    "tipoContratacaoPerfilVaga": "clt",
+    "tipoJornadaPerfilVaga": "liberal",
+    "localEnderecoCEPPerfilVaga": "12231810",
+    "localEnderecoPerfilVaga": "rua, bairro",
+    "localEnderecoNumeroPerfilVaga": "1234",
+    "faixaEtariaInicioPerfilVaga": "21",
+    "faixaEtariaFimPerfilVaga": "35",
+    "tempoExperienciaPerfilVaga": "2 anos",
+    "faixaSalarioInicioPerfilVaga": "2500.00",
+    "dataInicioDivulgacaoPerfilVaga": "01/1/2021",
+    "datafinaldivulgacaoPerfilVaga": "31/01/2021",
+    "competencia": [{
+        "descricao": "developer"
+    }],
+    "PalavraChave": [{
+        "DescricaoPalavraChave": "Chave"
+    }],
+    "IncritoIdSelecionado": [],
+    "ValeTransporte": "1",
+    "coordenadas": {
+        "type": "Point",
+        "coordinates": [-23.2406, -45.9003]
+    }
 }
 ```
 
 **Currículo**
 ```json
 {
-    "InscritoIdExterno":"1",
-    "rgInscrito":"123.123.123-12",
-    "dataNascimentoInscrito":"25/09/2000",
-    "sexoInscrito":"masculino",
-    "telefoneCelularInscrito":"(12)12344321",
-    "jornadaDesejadaInscrito":"padrão",
-    "tipoContratoDesejadoInscrito":"clt",
-    "EmailInscrito":"email@email.com",
-    "perfilProfissionalTituloInscrito":"full stack developer",
-    "perfilProfissionalDescricaoInscrito":"pleno com conhecimento em desenvolvimento full stack com node, dotnet, angular e react",
-    "nomeCompletoInscrito":"arthur c",
-    "enderecoCEPInscrito":"12345-608",
-    "enderecoLocalizacaoInscrito":"rua, bairro",
-    "complementoInscrito":"",
-    "enderecoLocalizacaoLatitudeInscrito":"",
-    "enderecoLocalizacaoLongitudeInscrito":"",
-
-    "experienciaProfissional": [
-        {
-         "descricao": "Desenvolvimento com front e back end",
-         "duracaoTempoExperiencia":"2 anos",
-         }
-      ],
-
-      "competencia": [
-        {
-         "descricao": "poliglota",
-        }
-      ],
-
-    "formacao": [
-        {
-            "curso":"banco de dados",
-            "Dataformacao":"22/06/2020",
-            "intituicao":"fatec"
-        }
-      ],
+    "InscritoIdExterno": "1",
+    "rgInscrito": "123.123.123-12",
+    "dataNascimentoInscrito": "25/09/2000",
+    "sexoInscrito": "masculino",
+    "telefoneCelularInscrito": "(12)9816719999",
+    "jornadaDesejadaInscrito": "padrão",
+    "tipoContratoDesejadoInscrito": "clt",
+    "EmailInscrito": "email@email.com",
+    "perfilProfissionalTituloInscrito": "Security coordenator",
+    "perfilProfissionalDescricaoInscrito": "pleno com conhecimento em desenvolvimento full stack com node, dotnet, angular e react",
+    "nomeCompletoInscrito": "arthur c",
+    "enderecoCEPInscrito": "12231810",
+    "enderecoLocalizacaoInscrito": "rua, bairro",
+    "complementoInscrito": "",
+    "experienciaProfissional": [{
+        "descricao": "Desenvolvimento com front e back end",
+        "duracaoTempoExperiencia": "2 anos"
+    }],
+    "competencia": [{
+        "descricao": "poliglota"
+    }],
+    "formacao": [{
+        "curso": "banco de dados",
+        "Dataformacao": "22/06/2020",
+        "intituicao": "fatec"
+    }],
+    "coordenadas": {
+        "type": "Point",
+        "coordinates": [-23.2406, -45.8994]
+    }
 }
 ```
 ## Documentação da API
