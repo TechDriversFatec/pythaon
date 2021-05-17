@@ -489,8 +489,8 @@ A busca pode receber parâmetros de três tipos: Texto, data e localização.</p
 - "chave": campo em que será realizada a busca. (String)
 - "operador": Campo que contém o parâmetro de data.(String)
 
-Os operadores são funções para comparar determinado parâmetro. Os operadores aceitos na api são:
-- eq  : Encontra valores que são iguais ao valor especificado
+\*Os operadores são funções para comparar determinado parâmetro. Os operadores aceitos na api são:
+- eq  : Encontra valores que são iguais ao valor especificado 
 - ne  : Encontra valores que são diferentes ao valor especificado
 - gt  : Encontra valores que são maiores ao valor especificado
 - gte : Encontra valores que são maiores ou iguais ao valor especificado
@@ -498,6 +498,7 @@ Os operadores são funções para comparar determinado parâmetro. Os operadores
 - lte : Encontra valores que são menores ou iguais ao valor especificado
 
 <p>Exemplo de parâmetros de busca:</p>
+
 ``` json
 [
  {
@@ -523,7 +524,6 @@ Os operadores são funções para comparar determinado parâmetro. Os operadores
   "gte"   : "2013-09-0100:00:00"
  }
 ]
-
 ```
 </details>
 
