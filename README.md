@@ -497,8 +497,7 @@ Os operadores são funções para comparar determinado parâmetro. Os operadores
 - lt  : Encontra valores que são menores ao valor especificado
 - lte : Encontra valores que são menores ou iguais ao valor especificado
 
-<p>Response 200:</p>
-
+<p>Exemplo de parâmetros de busca:</p>
 ``` json
 [
  {
@@ -522,8 +521,9 @@ Os operadores são funções para comparar determinado parâmetro. Os operadores
   "tipo"  : "data",	
   "chave" : "dataNascimentoInscrito",
   "gte"   : "2013-09-0100:00:00"
-}
+ }
 ]
+
 ```
 </details>
 
