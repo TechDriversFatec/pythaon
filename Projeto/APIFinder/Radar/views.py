@@ -1,15 +1,11 @@
 import json
 import pymongo
 import dns
-from pycep_correios import get_address_from_cep, WebService
-from geopy.geocoders import Nominatim
-from math import sin, cos, sqrt, atan2, radians
-from geopy import distance
-from haversine import haversine, Unit
+
 from .Finder import *
 from . import Vaga
 from .Vaga import Observer
-
+import time
 
 from pymongo import MongoClient
 
@@ -22,73 +18,7 @@ from bson import ObjectId
 from bson.json_util import dumps
 from bson.objectid import ObjectId
 
-def createConnection():
-   return pymongo.MongoClient("mongodb+srv://dbUser:system@cluster0.5hlez.mongodb.net/Finder?retryWrites=true&w=majority")
-
-def getAdressByCep(cep):
-   endereco = get_address_from_cep(cep, webservice=WebService.CORREIOS)
-   print(endereco['logradouro'] + ", " + endereco['cidade'])
-   geolocator = Nominatim(user_agent="APIFinder")
-   return geolocator.geocode(endereco['logradouro'] + ", " + endereco['cidade'] + " - " + endereco['bairro'])
-
-@csrf_exempt
-def buscarvaga(request, pk):
-   if request.method == "GET":
-      client = createConnection()
-      db = client["Finder"]
-      col = db["vagas"]
-  
-      vaga = col.find_one({"VagaIdExterno" : pk})
-      
-      if vaga:
-         return JsonResponse(dumps(vaga), safe=False)
-      else:
-         return JsonResponse({"message" : "Vaga não encontrada."}, status=200)
-   else:
-      return JsonResponse({"message": "Erro na requisição. Método esperado: GET."}, status=500)
-  
-@csrf_exempt
-def insert_vaga(request):
-   if request.method == "POST":
-      client = createConnection()
-      db = client["Finder"]
-      col = db["vagas"]
-      
-      result = col.insert_one(json.loads(request.body))
-      # result
-      return JsonResponse({"message" : "Vaga cadastrada com sucesso."}, status=200)
-   else:
-      return JsonResponse({"message": "Erro na requisição. Método esperado: POST."}, status=500)
-
-@csrf_exempt
-def updatevaga(request, pk):
-   if request.method == "PUT":
-      client = createConnection()
-      db = client["Finder"]
-      col = db["vagas"]
-      col.g
-      result = col.update_one({"VagaIdExterno" : pk}, json.loads(request.body))
-      # result
-      return JsonResponse({"message":"Vaga atualizada com sucesso."}, status=200)
-   else:
-      return JsonResponse({"message":"Erro na requisição. Método esperado: PUT."}, status=500)  
-
-@csrf_exempt
-def delete_vaga(request, pk):
-   if request.method == "DELETE":
-      client = createConnection()
-      db = client["Finder"]
-      col = db["vagas"]
-
-      db.collection.create_index({ "vaga" : "2dsphere" })
-      
-      result = col.delete_many({"VagaIdExterno": pk})
 class View:
-
-   #observer_vaga = None   
-
-   #def __init__(self):
-   #   self.observer_vaga = Vaga.Observer()
 
    def createConnection():
       return pymongo.MongoClient("mongodb+srv://dbUser:system@cluster0.5hlez.mongodb.net/Finder?retryWrites=true&w=majority")
@@ -304,100 +234,110 @@ class View:
       return IdCol
 
 
-@csrf_exempt
-def buscarPorVagaVT0(request,VagaID):
-   if request.method == 'GET':
-      client = createConnection()
-      db = client["Finder"]
-      vaga = db["vagas"]
-      curriculos = db["Inscrito"]
-      vaga = vaga.find_one({"VagaIdExterno" : VagaID})  
-      query = { 
-         "$or" : [
-         {"coordenadas": {"$near": {"$maxDistance": 3000, "$geometry":{"type": "Point", "coordinates":[vaga['coordenadas']['coordinates'][0], vaga['coordenadas']['coordinates'][1]]}}}}
-         ]
-       }
-      result_curriculos = curriculos.find(query)
-      if result_curriculos:
-         IdCol = [str(result['_id']) for result in result_curriculos]
-         IdExterno = [str(result['InscritoIdExterno']) for result in result_curriculos]
-         return JsonResponse({
-                  "candidatos" : IdCol,
-                  "IdExterno" : IdExterno,
-                  "message" : ""
-                  })
-      else:
-         return JsonResponse({
-                  "candidatos" : [],
-                  "message" : "Nenhum candidato encontrado para esta vaga."
-                  }, status=200)
-
-      return JsonResponse({"message" : "Vaga não encontrada."}, status=200)
-   else:
-      return JsonResponse({"message" : "Vaga não encontrada."}, status=200)
-
-@csrf_exempt
-def buscarPorVaga(request,VagaID):
-   if request.method == 'GET':
-      # Inicia conexão com o banco
-      client = View.createConnection()
-
-      mydb = client["Finder"]
-      curriculos = mydb["Inscrito"]
-      vagas = mydb["vagas"]
-
-      # Recupera a vaga recebida por parâmetro
-      vaga = vagas.find_one({"VagaIdExterno" : VagaID})
-
-      if vaga:
-         searchRequisitos = '|'.join([str(requisito['descricao']) for requisito in vaga['competencia']])
-
-         query = {
-            "$or" : [ 
-               # { "tipoContratoDesejadoInscrito" : { "$regex": vaga['tipoContratacaoPerfilVaga'] } },
-               { "perfilProfissionalTituloInscrito" : { "$regex":searchRequisitos } },
-               { "perfilProfissionalDescricaoInscrito" : { "$regex": searchRequisitos } },
-               { "experienciaProfissional.descricao": { "$regex": searchRequisitos } },
-               { "formacao.curso": { "$regex": searchRequisitos } },
-               { "competencia.descricao": { "$regex": searchRequisitos } } 
-            ] 
+   @csrf_exempt
+   def buscarPorVagaVT0(request,VagaID):
+      if request.method == 'GET':
+         client = View.createConnection()
+         db = client["Finder"]
+         vaga = db["vagas"]
+         curriculos = db["Inscrito"]
+         vaga = vaga.find_one({"VagaIdExterno" : VagaID})  
+         query = { 
+            "$or" : [
+            {"coordenadas": {"$near": {"$maxDistance": 3000, "$geometry":{"type": "Point", "coordinates":[vaga['coordenadas']['coordinates'][0], vaga['coordenadas']['coordinates'][1]]}}}}
+            ]
          }
-
          result_curriculos = curriculos.find(query)
-         IdCol = [str(result['_id']) for result in result_curriculos]
-     
-      return IdCol
+         if result_curriculos:
+            IdCol = [str(result['_id']) for result in result_curriculos]
+            IdExterno = [str(result['InscritoIdExterno']) for result in result_curriculos]
+            return JsonResponse({
+                     "candidatos" : IdCol,
+                     "IdExterno" : IdExterno,
+                     "message" : ""
+                     })
+         else:
+            return JsonResponse({
+                     "candidatos" : [],
+                     "message" : "Nenhum candidato encontrado para esta vaga."
+                     }, status=200)
+      else:
+         return JsonResponse({"message" : "Vaga não encontrada."}, status=200)
 
-   def BuscaCurriculoxVaga(IdCurriculo):
+   @csrf_exempt
+   def buscarPorVaga(request,VagaID):
+      if request.method == 'GET':
+         # Inicia conexão com o banco
+         client = View.createConnection()
 
-      client = View.createConnection()
+         mydb = client["Finder"]
+         curriculos = mydb["Inscrito"]
+         vagas = mydb["vagas"]
 
-      mydb = client["Finder"]
-      curriculos = mydb["Inscrito"]
-      vagas = mydb["vagas"]
+         # Recupera a vaga recebida por parâmetro
+         vaga = vagas.find_one({"VagaIdExterno" : VagaID})
 
-      curriculo = curriculos.find_one({"_id" : IdCurriculo})
+         if vaga:
+            searchRequisitos = '|'.join([str(requisito['descricao']) for requisito in vaga['competencia']])
 
-      if curriculo:
-         searchRequisitos = '|'.join([str(requisito['descricao']) for requisito in curriculo['competencia']])
-         seachPorProfissao = curriculo['perfilProfissionalTituloInscrito']
-         searchPorCurso = '|'.join([str(requisito['curso']) for requisito in curriculo['formacao']])
+            query = {
+               "$or" : [ 
+                  # { "tipoContratoDesejadoInscrito" : { "$regex": vaga['tipoContratacaoPerfilVaga'] } },
+                  { "perfilProfissionalTituloInscrito" : { "$regex":searchRequisitos } },
+                  { "perfilProfissionalDescricaoInscrito" : { "$regex": searchRequisitos } },
+                  { "experienciaProfissional.descricao": { "$regex": searchRequisitos } },
+                  { "formacao.curso": { "$regex": searchRequisitos } },
+                  { "competencia.descricao": { "$regex": searchRequisitos } } 
+               ] 
+            }
 
-         query = {
-            "$or" : [ 
-               { "PalavraChave.DescricaoPalavraChave": { "$regex": seachPorProfissao } },
-               { "competencia.descricao": { "$regex": seachPorProfissao } },
-               { "PalavraChave.DescricaoPalavraChave": { "$regex": searchPorCurso } },
-               { "competencia.descricao": { "$regex": searchPorCurso } },
-               { "PalavraChave.DescricaoPalavraChave": { "$regex": searchRequisitos } },
-               { "competencia.descricao": { "$regex": searchRequisitos } } 
-            ] 
-         }
-
-         results_vagas = vagas.find(query)
-
-         for x in results_vagas:
-            print(x)
-
-         return results_vagas
-
+            result_curriculos = curriculos.find(query)
+            IdCol = [str(result['_id']) for result in result_curriculos]
+      
+         return IdCol
+   
+   @csrf_exempt
+   def buscaFiltrada(request):
+      if request.method == 'GET':
+         client = View.createConnection()
+         mydb = client["Finder"]
+         curriculos = mydb["Inscrito"]
+         parametros = json.loads(request.body)
+         query = {}
+         
+         try:
+            for item in parametros:
+               if isinstance(item, dict):
+                  if item['tipo'] == 'texto':
+                     if isinstance(item['valor'], list): query[item['chave']] = { "$regex": '(?i)' + '|'.join([str(requisito) for requisito in item['valor']])  }
+                     else: query[item['chave']] = { "$regex": '(?i)' + item['valor'] }
+                  elif item['tipo'] == 'distancia': 
+                     query[item['chave']] = {
+                           "$near" : {
+                              "$geometry"    : { "type": "Point",  "coordinates": item['valor'] },
+                              "$minDistance" : item['mindist'],
+                              "$maxDistance" : item['maxdist']
+                           }
+                     }
+                  elif item['tipo'] == 'data':
+                     if 'eq'  in item: query[item['chave']] = { "$eq" : item['eq'] }
+                     if 'ne'  in item: query[item['chave']] = { "$ne" : item['ne'] }
+                     if 'gt'  in item: query[item['chave']] = { "$gt" : item['gt'] }
+                     if 'gte' in item: query[item['chave']] = { "$gte" : item['gte'] }
+                     if 'lt'  in item: query[item['chave']] = { "$lt" : item['lt'] }
+                     if 'lte' in item: query[item['chave']] = { "$lte" : item['lte'] }
+                     # if 'in'  in item: query[item['chave']] = { "$in" : item['in'] }
+                     # if 'nin' in item: query[item['chave']] = { "$nin" : item['nin'] } 
+               else:
+                  return JsonResponse({"message": "Parâmetros inválidos."}, status=500)
+            print(query)
+            data = time.time()
+            curriculos = curriculos.find(query)
+            print("Tempo de execução: ",time.time() - data)
+         except:
+            return JsonResponse({"message": "Erro ao gerar a busca. Os parâmetros enviados contém erros."}, status=500)
+         
+         return JsonResponse(json.loads(dumps(curriculos)), safe=False)
+      else:
+         return JsonResponse({"message": "Erro na requisição. Método esperado: GET."}, status=500)
+      
