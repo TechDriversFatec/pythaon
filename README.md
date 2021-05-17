@@ -487,14 +487,14 @@ Realiza uma busca por currículo baseada na vaga enviada por parâmetro e retorn
 **Data:**
 - "tipo" : Tipo de busca a ser realizada.
 - "chave": campo em que será realizada a busca. (String)
-- "<Operador>*": Campo que contém o parâmetro de data.(String)
+- "operador": Campo que contém o parâmetro de data.(String)
 
 <p>Os operadores são funções para comparar determinado parâmetro. Os operadores aceitos na api são:</p>
-- eq - Encontra valores que são iguais ao valor especificado
-- ne - Encontra valores que são diferentes ao valor especificado
-- gt - Encontra valores que são maiores ao valor especificado
+- eq  - Encontra valores que são iguais ao valor especificado
+- ne  - Encontra valores que são diferentes ao valor especificado
+- gt  - Encontra valores que são maiores ao valor especificado
 - gte -  Encontra valores que são maiores ou iguais ao valor especificado
-- lt -  Encontra valores que são menores ao valor especificado
+- lt  -  Encontra valores que são menores ao valor especificado
 - lte - Encontra valores que são menores ou iguais ao valor especificado
 
 <p>Response 200:</p>
