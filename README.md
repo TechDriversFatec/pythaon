@@ -61,9 +61,15 @@ Nossa proposta é desenvolver um sistema para a otimização e que facilite o pr
 | Criar buscas de currículos por parâmetros | Concluído |
 | Criar buscas por geolocalização | Concluído |
 | Atualizar estruturas e cadastros para receber geolocalização | Concluído |
-| Pesquisar por currículos compatíveis quando | Concluído |
+| Pesquisar por currículos compatíveis quando inserir/atualizar uma vaga | Concluído |
 
 #### Sprint 04
+| Requisito           | Status |  
+| ----------------------------------|---------|
+| Trabalhar desempenho das buscas por inserção/atualização de vaga | Não iniciado |
+| Trabalhar desempenho das buscas filtradas utilizando testes de carga expressivos | Não iniciado |
+| Aplicar tratamento de erros nos métodos da API | Em andamento |
+| Incrementar busca por inserção/atualização de vagas para buscar também por localização (quando necessário) | Em andamento |
 
 ## Diagrama de caso de uso:
 ![Casos de uso](/Documentos/CasoUso1.png)
