@@ -467,7 +467,7 @@ Realiza uma busca por currículo baseada na vaga enviada por parâmetro e retorn
 
 <details>
 <summary>
-<b>🟦GET</b> /busca_Filtrada
+<b>🟦GET</b> /buscaFiltrada
 </summary>
 <p>Recebe um array de parâmetros dinâmicos e executa uma busca no banco de dados.<br>
 A busca pode receber parâmetros de três tipos: Texto, data e localização.</p>
