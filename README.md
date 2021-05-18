@@ -70,6 +70,8 @@ Nossa proposta é desenvolver um sistema para a otimização e que facilite o pr
 | Trabalhar desempenho das buscas filtradas utilizando testes de carga expressivos | Não iniciado |
 | Aplicar tratamento de erros nos métodos da API | Em andamento |
 | Incrementar busca por inserção/atualização de vagas para buscar também por localização (quando necessário) | Em andamento |
+| Implementar recebimento de parâmetros para limitar o número de resultados de uma busca | Em andamento |
+| Implementar medidas de segurança de acesso ao banco e a aplicação | Em andamento |
 
 ## Diagrama de caso de uso:
 ![Casos de uso](/Documentos/CasoUso1.png)
@@ -459,6 +461,23 @@ Exclui o currículo baseado no parâmetro, caso encontrado.
 <b>🟦GET</b> /buscaPorVaga/[Id da Vaga]
 </summary>
 Realiza uma busca por currículo baseada na vaga enviada por parâmetro e retorna os ids dos candidatos.
+<p>Response 200:</p>
+
+``` json
+{
+    "candidatos": [
+        "123","433","54","1123"
+    ],
+    "message": ""
+}
+```
+</details>
+
+<details>
+<summary>
+<b>🟦GET</b> /busca_VT0/11/[Id da Vaga]
+</summary>
+Realiza uma busca por currículos próximos à uma vaga enviada por parâmetro e retorna os ids dos candidatos.
 <p>Response 200:</p>
 
 ``` json
