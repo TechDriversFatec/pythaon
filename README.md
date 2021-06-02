@@ -1,3 +1,5 @@
+![Pythaon](/Documentos/Logo_Pythaon.png)
+
 <div align="center">
       <h2>Menu</h2>
       <p>
@@ -580,8 +582,7 @@ A busca pode receber parâmetros de três tipos: Texto, data e localização.</p
 | Implementar medidas de segurança de acesso ao banco e a aplicação | Em andamento |
 
 ## Tecnologias Utilizadas:
-* Python/Django
-* MongoDB
+![Pythaon](/Documentos/TecnoGit.png)
 
 # INTEGRANTES
 
