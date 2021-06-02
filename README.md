@@ -1,17 +1,34 @@
+<div align="center">
+      <h2>Menu</h2>
+      <p>
+            :small_blue_diamond:<a href="#quem_somos">Introdução</a>
+            :small_blue_diamond:<a href="#problema">Introdução</a>
+            :small_blue_diamond:<a href="#proposta">Como usar</a>
+            :small_blue_diamond:<a href="#arquitetura">Arquitetura</a>
+            :small_blue_diamond:<a href="#backlog">Backlog</a>
+            :small_blue_diamond:<a href="#bd">Banco de Dados</a>
+            :small_blue_diamond:<a href="#equipe">Equipe</a>
+      </p>
+</div>
+
+
 # <h1>Projeto Integrador 4º Semestre BD - Grupo Pythaon</h1>
 
 GitLab para desenvolvimento do Projeto Integrador do 4º Semestre - Banco de dados FATEC SJC
 
+<a name="quem_somos"></a>
 ## Quem somos?
 Olá! Muito prazer! 
 Nós somos o grupo Pythaon, um time de alunos do 4° semestre do curso de Banco de Dados da FATEC de São José dos Campos. Esse grupo tem como objetivo desenvolver um projeto (PI) para solucionar um problema proposto por um cliente parceiro da instituição.
 
+<a name="problema"></a>
 ## O problema
 O setor de RH precisa de uma solução parametrizável que combine diversos critérios, para
 busca de candidatos em diferentes vagas com diferentes recrutadores numa proposta de
 processo eficiente para contratação e evasão de funcionários, reduzindo custos e
 aumentando a satisfação com alocações mais adequadas.
 
+<a name="proposta"></a>
 ## Proposta do projeto
 Nossa proposta é desenvolver um sistema para a otimização e que facilite o processo de contratação de novos colaboradores , respeitando os requisitos, visando a rapidez e agilidade no processo. Para que esses objetivos sejam atingidos, utilizaremos uma um SGBD orientado a documentos (MongoDB), visando que as estruturas de currículos e vagas são maleáveis e se aproveitam bem da estrutura de documento usada, além de questões de desempenho e funcionalidades que podem ser aproveitadas. 
 
@@ -33,45 +50,12 @@ Nossa proposta é desenvolver um sistema para a otimização e que facilite o pr
 |Segurança (Safety)         |RF03     |
 |Documentação específica                     |RF04     | 
 
-## Backlog do Projeto:
-
-#### Sprint 01
-| Requisito           | Status |  
-| ----------------------------------|---------|
-| Definir estrutura do projeto  | Concluído  |
-| Definir funcionalidades iniciais  | Concluído  |
-| Definir estrutura exemplo do documento de candidato  | Concluído  |
-| Implementação da conexão com MongoDB  | Concluído  |
-| Inserir exemplo de currículo e criar busca simples  | Concluído |
-
-#### Sprint 02
-| Requisito           | Status |  
-| ----------------------------------|---------|
-| Definir estrutura para currículo | Concluído |
-| Definir estrutura para vaga | Concluído |
-| Criar interface crud de candidatos | Concluído |
-| Criar interface crud de vagas | Concluído |
-| Criar método de busca de currículos por vaga | Concluído |
-| Iniciar a documentação de uso das APIs do projeto | Concluído |
+### :camera: 1.2. Apresentação da Evolução do Projeto
+ Sprint 1  | Sprint 2 | Sprint 3 | Sprint 4 
+--------- |--------- |--------- |--------- |
+<p>:heavy_check_mark:<a href="#sprint01">Completed</a></p> |<p>:heavy_check_mark:<a href="#sprint02">Completed</a></p> |<p>:heavy_check_mark:<a href="#sprint03">Completed</a></p> |<p>:warning:<a href="#sprint04">Ongoing</a></p> |
 
 
-#### Sprint 03
-| Requisito           | Status |  
-| ----------------------------------|---------|
-| Criar buscas de currículos por parâmetros | Concluído |
-| Criar buscas por geolocalização | Concluído |
-| Atualizar estruturas e cadastros para receber geolocalização | Concluído |
-| Pesquisar por currículos compatíveis quando inserir/atualizar uma vaga | Concluído |
-
-#### Sprint 04
-| Requisito           | Status |  
-| ----------------------------------|---------|
-| Trabalhar desempenho das buscas por inserção/atualização de vaga | Não iniciado |
-| Trabalhar desempenho das buscas filtradas utilizando testes de carga expressivos | Não iniciado |
-| Aplicar tratamento de erros nos métodos da API | Em andamento |
-| Incrementar busca por inserção/atualização de vagas para buscar também por localização (quando necessário) | Em andamento |
-| Implementar recebimento de parâmetros para limitar o número de resultados de uma busca | Em andamento |
-| Implementar medidas de segurança de acesso ao banco e a aplicação | Em andamento |
 
 ## Diagrama de caso de uso:
 ![Casos de uso](/Documentos/CasoUso1.png)
@@ -551,6 +535,49 @@ A busca pode receber parâmetros de três tipos: Texto, data e localização.</p
 ]
 ```
 </details>
+
+## Backlog do Projeto:
+
+<a name="sprint01"></a>
+#### Sprint 01
+| Requisito           | Status |  
+| ----------------------------------|---------|
+| Definir estrutura do projeto  | Concluído  |
+| Definir funcionalidades iniciais  | Concluído  |
+| Definir estrutura exemplo do documento de candidato  | Concluído  |
+| Implementação da conexão com MongoDB  | Concluído  |
+| Inserir exemplo de currículo e criar busca simples  | Concluído |
+
+<a name="sprint02"></a>
+#### Sprint 02
+| Requisito           | Status |  
+| ----------------------------------|---------|
+| Definir estrutura para currículo | Concluído |
+| Definir estrutura para vaga | Concluído |
+| Criar interface crud de candidatos | Concluído |
+| Criar interface crud de vagas | Concluído |
+| Criar método de busca de currículos por vaga | Concluído |
+| Iniciar a documentação de uso das APIs do projeto | Concluído |
+
+<a name="sprint03"></a>
+#### Sprint 03
+| Requisito           | Status |  
+| ----------------------------------|---------|
+| Criar buscas de currículos por parâmetros | Concluído |
+| Criar buscas por geolocalização | Concluído |
+| Atualizar estruturas e cadastros para receber geolocalização | Concluído |
+| Pesquisar por currículos compatíveis quando inserir/atualizar uma vaga | Concluído |
+
+<a name="sprint04"></a>
+#### Sprint 04
+| Requisito           | Status |  
+| ----------------------------------|---------|
+| Trabalhar desempenho das buscas por inserção/atualização de vaga | Não iniciado |
+| Trabalhar desempenho das buscas filtradas utilizando testes de carga expressivos | Não iniciado |
+| Aplicar tratamento de erros nos métodos da API | Em andamento |
+| Incrementar busca por inserção/atualização de vagas para buscar também por localização (quando necessário) | Em andamento |
+| Implementar recebimento de parâmetros para limitar o número de resultados de uma busca | Em andamento |
+| Implementar medidas de segurança de acesso ao banco e a aplicação | Em andamento |
 
 ## Tecnologias Utilizadas:
 * Python/Django
