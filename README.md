@@ -6,7 +6,7 @@
       <h2>Menu</h2>
       <p>
             :small_blue_diamond:<a href="#quem_somos">Quem somos?</a>
-            :small_blue_diamond:<a href="#problema">Problea</a>
+            :small_blue_diamond:<a href="#problema">Problema</a>
             :small_blue_diamond:<a href="#proposta">Proposta</a>
             :small_blue_diamond:<a href="#arquitetura">Arquitetura</a>
             :small_blue_diamond:<a href="#backlog">Backlog</a>
