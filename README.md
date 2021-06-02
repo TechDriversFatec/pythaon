@@ -5,9 +5,9 @@
 <div align="center">
       <h2>Menu</h2>
       <p>
-            :small_blue_diamond:<a href="#quem_somos">Introdução</a>
-            :small_blue_diamond:<a href="#problema">Introdução</a>
-            :small_blue_diamond:<a href="#proposta">Como usar</a>
+            :small_blue_diamond:<a href="#quem_somos">Quem somos?</a>
+            :small_blue_diamond:<a href="#problema">Problea</a>
+            :small_blue_diamond:<a href="#proposta">Proposta</a>
             :small_blue_diamond:<a href="#arquitetura">Arquitetura</a>
             :small_blue_diamond:<a href="#backlog">Backlog</a>
             :small_blue_diamond:<a href="#bd">Banco de Dados</a>
@@ -60,9 +60,13 @@ Nossa proposta é desenvolver um sistema para a otimização e que facilite o pr
 |<p>:heavy_check_mark:<a href="#sprint01">Completed</a></p>|<p>:heavy_check_mark:<a href="#sprint02">Completed</a></p>|<p>:heavy_check_mark:<a href="#sprint03">Completed</a></p>|<p>:warning:<a href="#sprint04">Ongoing</a></p>|
 
 
-
+# Estrutura do Projeto
 ## Diagrama de caso de uso:
 ![Casos de uso](/Documentos/CasoUso1.png)
+
+## Design da aplicação
+![Design da aplicação](/Documentos/EstruturaAPI.png)
+
 ## Modelo do banco de dados:
 **Vaga**
 ```json
