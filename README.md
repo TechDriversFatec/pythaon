@@ -8,7 +8,7 @@
             :small_blue_diamond:<a href="#quem_somos">Quem somos?</a>
             :small_blue_diamond:<a href="#problema">Problema</a>
             :small_blue_diamond:<a href="#proposta">Proposta</a>
-            :small_blue_diamond:<a href="#estrutra">Estrutura do projeto</a>
+            :small_blue_diamond:<a href="#estrutura">Estrutura do projeto</a>
             :small_blue_diamond:<a href="#tecnologia">Tecnologias</a>
             :small_blue_diamond:<a href="#equipe">Equipe</a>
       </p>
