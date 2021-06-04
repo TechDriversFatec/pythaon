@@ -8,7 +8,7 @@
             :small_blue_diamond:<a href="#quem_somos">Quem somos?</a>
             :small_blue_diamond:<a href="#problema">Problema</a>
             :small_blue_diamond:<a href="#proposta">Proposta</a>
-            :small_blue_diamond:<a href="#arquitetura">Arquitetura</a>
+            :small_blue_diamond:<a href="#estrutra">Estrutura do projeto</a>
             :small_blue_diamond:<a href="#backlog">Backlog</a>
             :small_blue_diamond:<a href="#bd">Banco de Dados</a>
             :small_blue_diamond:<a href="#equipe">Equipe</a>
@@ -59,7 +59,7 @@ Nossa proposta é desenvolver um sistema para a otimização e que facilite o pr
 |--------- |--------- |--------- |--------- |
 |<p>:heavy_check_mark:<a href="#sprint01">Completed</a></p>|<p>:heavy_check_mark:<a href="#sprint02">Completed</a></p>|<p>:heavy_check_mark:<a href="#sprint03">Completed</a></p>|<p>:warning:<a href="#sprint04">Ongoing</a></p>|
 
-
+<a name="estrutura"></a>
 # Estrutura do Projeto
 ## Diagrama de caso de uso:
 ![Casos de uso](/Documentos/CasoUso1.png)
@@ -547,45 +547,41 @@ A busca pode receber parâmetros de três tipos: Texto, data e localização.</p
 ## Backlog do Projeto:
 
 <a name="sprint01"></a>
-#### Sprint 01
-| Requisito           | Status |  
-| ----------------------------------|---------|
-| Definir estrutura do projeto  | Concluído  |
-| Definir funcionalidades iniciais  | Concluído  |
-| Definir estrutura exemplo do documento de candidato  | Concluído  |
-| Implementação da conexão com MongoDB  | Concluído  |
-| Inserir exemplo de currículo e criar busca simples  | Concluído |
+### Sprint 01
+#### :white_check_mark: Requisitos 
+- [x] Definir estrutura do projeto
+- [x] Definir funcionalidades iniciais
+- [x] Definir estrutura exemplo do documento de candidato
+- [x] Implementação da conexão com MongoDB
+- [x] Inserir exemplo de currículo e criar busca simples
 
 <a name="sprint02"></a>
-#### Sprint 02
-| Requisito           | Status |  
-| ----------------------------------|---------|
-| Definir estrutura para currículo | Concluído |
-| Definir estrutura para vaga | Concluído |
-| Criar interface crud de candidatos | Concluído |
-| Criar interface crud de vagas | Concluído |
-| Criar método de busca de currículos por vaga | Concluído |
-| Iniciar a documentação de uso das APIs do projeto | Concluído |
+### Sprint 02
+#### :white_check_mark: Requisitos        
+- [x] Definir estrutura para currículo
+- [x] Definir estrutura para vaga
+- [x] Criar interface crud de candidatos 
+- [x] Criar interface crud de vagas 
+- [x] Criar método de busca de currículos por vaga 
+- [x] Iniciar a documentação de uso das APIs do projeto 
 
 <a name="sprint03"></a>
-#### Sprint 03
-| Requisito           | Status |  
-| ----------------------------------|---------|
-| Criar buscas de currículos por parâmetros | Concluído |
-| Criar buscas por geolocalização | Concluído |
-| Atualizar estruturas e cadastros para receber geolocalização | Concluído |
-| Pesquisar por currículos compatíveis quando inserir/atualizar uma vaga | Concluído |
+### Sprint 03
+#### :white_check_mark: Requisitos
+- [x] Criar buscas de currículos por parâmetros 
+- [x] Criar buscas por geolocalização 
+- [x] Atualizar estruturas e cadastros para receber geolocalização 
+- [x] Pesquisar por currículos compatíveis quando inserir/atualizar uma vaga 
 
 <a name="sprint04"></a>
-#### Sprint 04
-| Requisito           | Status |  
-| ----------------------------------|---------|
-| Trabalhar desempenho das buscas por inserção/atualização de vaga | Não iniciado |
-| Trabalhar desempenho das buscas filtradas utilizando testes de carga expressivos | Não iniciado |
-| Aplicar tratamento de erros nos métodos da API | Em andamento |
-| Incrementar busca por inserção/atualização de vagas para buscar também por localização (quando necessário) | Em andamento |
-| Implementar recebimento de parâmetros para limitar o número de resultados de uma busca | Em andamento |
-| Implementar medidas de segurança de acesso ao banco e a aplicação | Em andamento |
+### Sprint 04
+#### :white_check_mark: Requisitos
+- [ ] Trabalhar desempenho das buscas por inserção/atualização de vaga 
+- [ ] Trabalhar desempenho das buscas filtradas utilizando testes de carga expressivos 
+- [ ] Aplicar tratamento de erros nos métodos da API 
+- [ ] Incrementar busca por inserção/atualização de vagas para buscar também por localização (quando necessário) 
+- [ ] Implementar recebimento de parâmetros para limitar o número de resultados de uma busca 
+- [ ] Implementar medidas de segurança de acesso ao banco e a aplicação
 
 ## Tecnologias Utilizadas:
 ![Pythaon](/Documentos/TecnoGit.png)
