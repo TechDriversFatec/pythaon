@@ -9,8 +9,7 @@
             :small_blue_diamond:<a href="#problema">Problema</a>
             :small_blue_diamond:<a href="#proposta">Proposta</a>
             :small_blue_diamond:<a href="#estrutra">Estrutura do projeto</a>
-            :small_blue_diamond:<a href="#backlog">Backlog</a>
-            :small_blue_diamond:<a href="#bd">Banco de Dados</a>
+            :small_blue_diamond:<a href="#tecnologia">Tecnologias</a>
             :small_blue_diamond:<a href="#equipe">Equipe</a>
       </p>
 </div>
@@ -575,7 +574,7 @@ A busca pode receber parâmetros de três tipos: Texto, data e localização.</p
 
 <a name="sprint04"></a>
 ### Sprint 04
-#### :white_check_mark: Requisitos
+#### :construction: Requisitos
 - [ ] Trabalhar desempenho das buscas por inserção/atualização de vaga 
 - [ ] Trabalhar desempenho das buscas filtradas utilizando testes de carga expressivos 
 - [ ] Aplicar tratamento de erros nos métodos da API 
@@ -583,9 +582,11 @@ A busca pode receber parâmetros de três tipos: Texto, data e localização.</p
 - [ ] Implementar recebimento de parâmetros para limitar o número de resultados de uma busca 
 - [ ] Implementar medidas de segurança de acesso ao banco e a aplicação
 
+<a name="tecnologia"></a>
 ## Tecnologias Utilizadas:
 ![Pythaon](/Documentos/TecnoGit.png)
 
+<a name="equipe"></a>
 # INTEGRANTES
 
  * GABRIEL DE QUEIROZ CORDEIRO **| Product Owner |**
