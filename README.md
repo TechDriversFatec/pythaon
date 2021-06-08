@@ -575,12 +575,11 @@ A busca pode receber parâmetros de três tipos: Texto, data e localização.</p
 <a name="sprint04"></a>
 ### Sprint 04
 #### :construction: Requisitos
-- [ ] Trabalhar desempenho das buscas por inserção/atualização de vaga 
-- [ ] Trabalhar desempenho das buscas filtradas utilizando testes de carga expressivos 
-- [ ] Aplicar tratamento de erros nos métodos da API 
-- [ ] Incrementar busca por inserção/atualização de vagas para buscar também por localização (quando necessário) 
-- [ ] Implementar recebimento de parâmetros para limitar o número de resultados de uma busca 
-- [ ] Implementar medidas de segurança de acesso ao banco e a aplicação
+- [x] Subir aplicação no Heroku
+- [x] Trabalhar desempenho das buscas por inserção/atualização de vaga 
+- [x] Trabalhar desempenho das buscas filtradas utilizando testes de carga expressivos 
+- [x] Aplicar tratamento de erros nos métodos da API 
+- [x] Incrementar busca por inserção/atualização de vagas para buscar também por localização (quando necessário)
 
 <a name="tecnologia"></a>
 ## Tecnologias Utilizadas:
