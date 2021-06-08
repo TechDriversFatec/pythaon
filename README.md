@@ -56,7 +56,7 @@ Nossa proposta é desenvolver um sistema para a otimização e que facilite o pr
 ### :camera: 1.2. Apresentação da Evolução do Projeto
 | Sprint 1  | Sprint 2 | Sprint 3 | Sprint 4 |
 |--------- |--------- |--------- |--------- |
-|<p>:heavy_check_mark:<a href="#sprint01">Completed</a></p>|<p>:heavy_check_mark:<a href="#sprint02">Completed</a></p>|<p>:heavy_check_mark:<a href="#sprint03">Completed</a></p>|<p>:warning:<a href="#sprint04">Ongoing</a></p>|
+|<p>:heavy_check_mark:<a href="#sprint01">Completed</a></p>|<p>:heavy_check_mark:<a href="#sprint02">Completed</a></p>|<p>:heavy_check_mark:<a href="#sprint03">Completed</a></p>|<p>:heavy_check_mark:<a href="#sprint04">Completed</a></p>|
 
 <a name="estrutura"></a>
 # Estrutura do Projeto
