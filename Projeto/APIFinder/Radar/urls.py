@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from . import VagaMethods
 
 urlpatterns = [
     path('buscar_vaga/<str:pk>',views.View.buscarvaga),
@@ -12,6 +13,6 @@ urlpatterns = [
     path('excluir_curriculo/<str:pk>',views.View.deletarCurriculo),
     path('busca_VT0/<str:VagaID>',views.View.buscarPorVagaVT0),
     path('buscaPorVaga/<str:VagaID>',views.View.buscarPorVaga),
-
+    path('buscaPorVagaEX/<str:VagaID>',VagaMethods.Vaga.buscarPorVagaEX),
 ]
 

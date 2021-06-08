@@ -216,3 +216,62 @@ class Vaga:
          return JsonResponse(dumps(vaga), safe=False)
       else:
          return JsonResponse({"message" : "Vaga não encontrada."}, status=200)
+      
+   @csrf_exempt
+   def buscarPorVagaEX(request,VagaID):
+      if request.method == 'GET':
+            # Inicia conexão com o banco
+         client = Vaga.createConnection()
+
+         mydb = client["test"]
+         curriculos = mydb["Inscrito"]
+         vagas = mydb["vagas"]
+
+         # Recupera a vaga recebida por parâmetro
+         vaga = vagas.find_one({"VagaIdExterno" : VagaID})
+
+         if vaga:
+            
+            searchRequisitos =  ' '.join([str(requisito['descricao']) for requisito in vaga['competencia']])
+            searchRequisitos += ' ' + ' '.join([str(requisito['DescricaoPalavraChave']) for requisito in vaga['PalavraChave']])
+            searchRequisitos += ' ' + vaga['tituloVaga']
+
+            # result_curriculos = curriculos.find(
+            #    { 
+            #       "$text": { "$search": searchRequisitos } 
+            #    },
+            #    { 
+            #       "score" : { "$meta" : "textScore" }
+            #    }  
+            # ).limit(10)
+            
+            result_curriculos = curriculos.find(
+                  { "$text": { "$search": searchRequisitos } },
+                  { "score" : { "$meta" : "textScore" } }  
+            ).limit(10)
+            
+            if result_curriculos:
+               IdCol = [str(result['_id']) for result in result_curriculos]
+               
+               if 'ValeTransporte' in vaga:
+                  result_curriculos = curriculos.find(
+                     {"coordenadas": {"$near": {"$maxDistance": 3333, "$geometry":{"type": "Point", "coordinates":[
+                                                            vaga['coordenadas']['coordinates'][0],
+                                                            vaga['coordenadas']['coordinates'][1]
+                                                         ]}}}}
+                  )
+                  IdCol = [str(result['_id']) for result in result_curriculos]
+               
+               return JsonResponse({
+                                    "candidatos" : IdCol,
+                                    "message" : ""
+                                 })
+            else:
+                  return JsonResponse({
+                                       "candidatos" : [],
+                                       "message" : "Nenhum candidato encontrado para esta vaga."
+                                    }, status=200)
+         else:
+            return JsonResponse({"message" : "Vaga não encontrada"}, status=200)
+      else:
+         return JsonResponse({"message": "Erro na requisição. Método esperado: GET."}, status=500)
