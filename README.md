@@ -133,6 +133,41 @@ Nossa proposta é desenvolver um sistema para a otimização e que facilite o pr
     }
 }
 ```
+## Index:
+
+<p>Foi criado um index do tipo "TEXT" em todos os campos de texto contidos na estrutura **Inscrito**, o mesmo contém nos valores do atributo **weights** os multiplicadores aplicados nas pesquisas. Esse tipo de index permite a utilização de buscas usando o operador **$text**, que efetua uma busca em todos os campos quem contém o index. </p>
+
+```python
+db.Inscrito.createIndex( 
+  { 
+	"$**" : "text" 
+  },
+  {
+    weights: {
+		rgInscrito:1,
+		dataNascimentoInscrito:1,
+		sexoInscrito:1,
+		telefoneCelularInscrito:1,
+		jornadaDesejadaInscrito:1,
+		tipoContratoDesejadoInscrito:1,
+		EmailInscrito:1,
+		perfilProfissionalTituloInscrito:5,
+		perfilProfissionalDescricaoInscrito:5,
+		nomeCompletoInscrito:1,
+		enderecoCEPInscrito:1,
+		enderecoLocalizacaoInscrito:2,
+		complementoInscrito:3
+    } 
+  } 
+)
+```
+
+```python
+db.Inscrito.find(
+    { $text: { "$search": "programador pleno python" } },
+    { "score" : { "$meta" : "textScore" }}  
+).Sort({ "score" : { $meta : "textScore" }})
+```
 ## Documentação da API
 <details >
 <summary>
