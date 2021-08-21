@@ -89,20 +89,29 @@ class Curriculo:
       vaga = vagas.find_one({"VagaIdExterno" : VagaID})
 
       if vaga:
-         searchRequisitos = '|'.join([str(requisito['descricao']) for requisito in vaga['competencia']])
 
-         query = {
-            "$or" : [ 
-               # { "tipoContratoDesejadoInscrito" : { "$regex": vaga['tipoContratacaoPerfilVaga'] } },
-               { "perfilProfissionalTituloInscrito" : { "$regex":searchRequisitos } },
-               { "perfilProfissionalDescricaoInscrito" : { "$regex": searchRequisitos } },
-               { "experienciaProfissional.descricao": { "$regex": searchRequisitos } },
-               { "formacao.curso": { "$regex": searchRequisitos } },
-               { "competencia.descricao": { "$regex": searchRequisitos } } 
-            ] 
-         }
-
-         result_curriculos = curriculos.find(query)
+         searchRequisitos =  ' '.join([str(requisito['descricao']) for requisito in vaga['competencia']])
+         searchRequisitos += ' ' + ' '.join([str(requisito['DescricaoPalavraChave']) for requisito in vaga['PalavraChave']])
+         searchRequisitos += ' ' + vaga['tituloVaga']
+         
+         result_curriculos = curriculos.find(
+                  { "$text": { "$search": searchRequisitos } },
+                  { "score" : { "$meta" : "textScore" } }).limit(10)
+         
+         IdCol = [str(result['_id']) for result in result_curriculos]
+         
+         if 'ValeTransporte' in vaga:
+            result_curriculos = curriculos.find(
+               {"coordenadas": {"$near": {"$maxDistance": 3000, "$geometry":{"type": "Point", "coordinates":[
+                                                      vaga['coordenadas']['coordinates'][0],
+                                                      vaga['coordenadas']['coordinates'][1]
+                                                   ]}}}}
+            )
+            IdCol = [str(result['_id']) for result in result_curriculos]
+         
+         # result_curriculos = curriculos.find(query)
          IdCol = [str(result['_id']) for result in result_curriculos]
      
       return IdCol
+   
+   
