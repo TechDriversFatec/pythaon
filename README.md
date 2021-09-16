@@ -629,3 +629,4 @@ A busca pode receber parâmetros de três tipos: Texto, data e localização.</p
  * ARTHUR CARDOSO RINALDI DA SILVA **| Dev Team |**
  * PERILO CARVALHO DE OLIVEIRA JUNIOR **| Dev Team |**
  * VINICIUS FERNANDES DE LIMA **| Dev Team |**
+# pythaon
